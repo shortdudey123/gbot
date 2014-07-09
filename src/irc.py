@@ -92,4 +92,4 @@ class IRCServer:
         return data
 
 if __name__ == "__main__":
-    print __main__.__doc__
+    print __doc__.strip()
