@@ -11,8 +11,7 @@
 # python_ver = 2.7.6
 # =============================================================================
 
-import socket
-import time
+import irc
 
 
 class IRCBot:
