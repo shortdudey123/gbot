@@ -17,7 +17,7 @@ import time
 
 class IRCServer:
     """
-    Takes in args to use to for interacting with an IRC server
+    Takes in args to use for interacting with an IRC server
     """
 
     def __init__(self, server, nick, port=6667, realName='', identify='', debug=False, connectDelay=2):
