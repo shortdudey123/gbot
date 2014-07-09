@@ -15,7 +15,7 @@ import socket
 import time
 
 
-class IRCServer:
+class IRCClient:
     """
     Takes in args to use for interacting with an IRC server
     """
