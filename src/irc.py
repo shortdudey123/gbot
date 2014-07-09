@@ -10,9 +10,6 @@
 # notes =
 # python_ver = 2.7.6
 # =============================================================================
-"""
-irc.py
-"""
 
 import socket
 import time
@@ -95,13 +92,5 @@ class IRCServer:
         return data
 
 if __name__ == "__main__":
-    className = IRCServer
-
-    # print out docstrings
-    if hasattr('__doc__'):
-            print getattr('__doc__')
-    if hasattr(getattr(className), '__doc__'):
-            print getattr(getattr(className), '__doc__')
-    for method in dir(className):
-        if hasattr(getattr(className, method), '__doc__'):
-            print getattr(getattr(className, method), '__doc__')
+    filename = __file__.split('.')[0]
+    help(filename)
