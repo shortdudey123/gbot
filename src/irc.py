@@ -29,9 +29,9 @@ class IRCServer:
         self.identify = identify
         self.connectDelay = connectDelay
         self.realName = realName
-		
-		if realName == '':
-			self.realName = self.nick
+        
+        if realName == '':
+            self.realName = self.nick
 
         self.irc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
