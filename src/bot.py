@@ -106,7 +106,7 @@ class IRCBot:
         now = datetime.datetime.now()
         print "{0} {1}".format(now, line)
 
-        if len(line) ==2 and line.split()[0] == "PING":
+        if len(line.split()) == 2 and line.split()[0] == "PING":
             pong(line.split()[1])
             print "{0} [INFO] Sending pong".format(now)
 
