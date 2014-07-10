@@ -57,6 +57,9 @@ class IRCBot:
         """
         self.bot.connectToServer()
 
+        while True:
+            print self.bot.getData()
+
         return
 
 if __name__ == "__main__":
