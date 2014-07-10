@@ -94,7 +94,7 @@ class IRCBot:
         connectData = self.bot.connectToServer()
 
         for data in connectData:
-            lines, splitLinesLeftover = self.bot.splitLines(data, splitLinesLeftover)
+            lines, splitLinesLeftover = self.splitLines(data, splitLinesLeftover)
             for line in lines:
                 print line
                 print "~~~~~~"
@@ -104,7 +104,7 @@ class IRCBot:
             now = datetime.datetime.now()
             print now
 
-            lines, splitLinesLeftover = self.bot.splitLines(data, splitLinesLeftover)
+            lines, splitLinesLeftover = self.splitLines(data, splitLinesLeftover)
             for line in lines:
                 print line
                 print "~~~~~~"
