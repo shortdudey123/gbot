@@ -25,7 +25,6 @@ class IRCClient:
         Initialize the IRC server object
 
         Args:
-            self (object): this python object instance
             server (str): DNS name or IP of IRC server to connect to
             nick (str): IRC nick to use
             port (int): port number that the IRC server runs on
@@ -58,7 +57,7 @@ class IRCClient:
         Connect to the IRC server
 
         Args:
-            self (object): this python object instance
+            None
 
         Returns:
             retData (list): data received from the server while connecting
@@ -102,7 +101,7 @@ class IRCClient:
         Disconnect from the IRC server
 
         Args:
-            self (object): this python object instance
+            None
 
         Returns:
             None
@@ -119,7 +118,6 @@ class IRCClient:
         Send a message in a given channel
 
         Args:
-            self (object): this python object instance
             channel (str): channel to send the message in
             message (str): message to send
             nick (str, optional): nick to prefix to the message for highlighting
@@ -147,7 +145,6 @@ class IRCClient:
         Join a given channel
 
         Args:
-            self (object): this python object instance
             channel (str): channel to join
             key (str, optional): key for the channel
 
@@ -165,7 +162,6 @@ class IRCClient:
         Change debuging status
 
         Args:
-            self (object): this python object instance
             debug (boolean): enable or disable debug
 
         Returns:
@@ -177,12 +173,28 @@ class IRCClient:
         self.debug = debug
         return
 
+    def sendPong(self, server):
+        """
+        Send a pong message
+
+        Args:
+            server (str): name of server to pong to
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        self.irc.send("PONG {0}\n".format(server))
+        return
+
     def getData(self):
         """
         Receive data from the IRC server
 
         Args:
-            self (object): this python object instance
+            None
 
         Returns:
             str: Data received from the server

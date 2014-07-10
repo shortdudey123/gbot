@@ -74,6 +74,22 @@ class IRCBot:
 
         return retLines, leftover
 
+    def pong(self, server):
+        """
+        Passes on the server to pong to
+
+        Args:
+            server (str): name of server to pong to
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        self.bot.sendPong(server)
+        return
+
     def parseLine(self, line):
         """
         Parses the lines received from the server
@@ -89,6 +105,10 @@ class IRCBot:
         """
         now = datetime.datetime.now()
         print "{0} {1}".format(now, line)
+
+        if len(line) ==2 and line.split()[0] == "PING":
+            pong(line.split()[1])
+
         return
 
     def run(self):
