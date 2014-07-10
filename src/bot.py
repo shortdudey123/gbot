@@ -12,6 +12,7 @@
 # =============================================================================
 
 import irc
+import datetime
 
 
 class IRCBot:
@@ -58,6 +59,8 @@ class IRCBot:
         self.bot.connectToServer()
 
         while True:
+            now = datetime.datetime.now()
+            print now
             print self.bot.getData()
 
         return
