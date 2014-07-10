@@ -25,7 +25,6 @@ class IRCBot:
         Initialize the IRC server object
 
         Args:
-            self (object): this python object instance
             server (str): DNS name or IP of IRC server to connect to
             nick (str): IRC nick to use
             port (int): port number that the IRC server runs on
@@ -49,7 +48,7 @@ class IRCBot:
         Run the bot
 
         Args:
-            self (object): this python object instance
+            None
 
         Returns:
             None
@@ -57,19 +56,60 @@ class IRCBot:
         Raises:
             None
         """
+        splitLinesLeftover = ''
         connectData = self.bot.connectToServer()
 
         for data in connectData:
-            print data
-            print "~~~~~~"
+            lines, splitLinesLeftover = splitLines(data, splitLinesLeftover)
+            for line in lines:
+                print line
+                print "~~~~~~"
 
         while True:
             data = self.bot.getData()
             now = datetime.datetime.now()
             print now
-            print data
+
+            lines, splitLinesLeftover = splitLines(data, splitLinesLeftover)
+            for line in lines:
+                print line
+                print "~~~~~~"
 
         return
+
+    def splitLines(self, lines, leftover=''):
+        """
+        Splits up the data received into lines
+
+        Note:
+            Based on readNetworkLoop method by IsaacG
+            https://github.com/IsaacG/python-projects/blob/master/ircbot/irc.py
+
+        Args:
+            lines (str): string of lines seperated by '\n'
+
+        Returns:
+            retLines (list): list of the seperated lines
+            leftover (str): left over that was not part of a complete line
+
+        Raises:
+            None
+        """
+        retLines = []
+
+        for line in lines.splitlines(True):
+            if line[-2:] == '\r\n':
+                line = line.rstrip('\r\n')
+                line = '{0}{1}'.format(leftover, line)
+                leftover = ''
+                retLines.append(line)
+            else:
+                leftover = line
+
+        return retLines, leftover
+
+    def parseLine(self, line):
+        pass
 
 if __name__ == "__main__":
     filename = __file__.split('.')[0]
