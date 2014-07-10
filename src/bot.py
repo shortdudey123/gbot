@@ -42,6 +42,60 @@ class IRCBot:
         """
         self.debug = debug
         self.bot = irc.IRCClient(server, nick, port, realName, identify, ircDebug, connectDelay)
+        self.channels = {}
+
+    def log(self, message, level="INFO"):
+        """
+        Logs the given message
+
+        Args:
+            message (str): message to log
+            level (str, optional): log level
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        now = datetime.datetime.now()
+        print "{0} [{1}] {2}".format(now, level, message)
+        return
+
+    def setDefaultChannels(self, channels):
+        """
+        Set the default channels to join on startup
+
+        Args:
+            channels (dict): channels with keys (i.e. {'channel1': '', 'channel2': 'key'})
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        log("Set default channels to: {0}".format(channels))
+        self.channels = channels
+        return
+
+    def joinDefaultChannels(self):
+        """
+        Join the default channels
+
+        Args:
+            None
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        log("Joining default channels")
+        for channel in self.channels.keys():
+            self.joinChannel(channel, self.channels[channel])
+        return
 
     def splitLines(self, lines, leftover=''):
         """
@@ -90,6 +144,23 @@ class IRCBot:
         self.bot.sendPong(server)
         return
 
+    def joinChannel(self, channel, key=''):
+        """
+        Join the given channel
+
+        Args:
+            channel (str): channel name
+            key (str, optional): key for the channel
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        self.bot.joinChannel(channel, key)
+        log("Joining {0}".format(channel))
+
     def parseLine(self, line):
         """
         Parses the lines received from the server
@@ -103,12 +174,11 @@ class IRCBot:
         Raises:
             None
         """
-        now = datetime.datetime.now()
-        print "{0} {1}".format(now, line)
+        self.log(line)
 
         if len(line.split()) == 2 and line.split()[0] == "PING":
             self.bot.sendPong(line.split()[1])
-            print "{0} [INFO] Sending pong".format(now)
+            self.log("Sending pong")
 
         return
 
@@ -132,6 +202,8 @@ class IRCBot:
             lines, splitLinesLeftover = self.splitLines(data, splitLinesLeftover)
             for line in lines:
                 self.parseLine(line)
+
+        self.joinDefaultChannels()
 
         while True:
             data = self.bot.getData()
