@@ -40,7 +40,7 @@ class IRCBot:
         Raises:
             None
         """
-
+        self.debug = debug
         self.bot = irc.IRCClient(server, nick, port, realName, identify, debug, connectDelay)
 
     def run(self):
@@ -56,7 +56,11 @@ class IRCBot:
         Raises:
             None
         """
-        self.bot.connectToServer()
+        connectData = self.bot.connectToServer()
+
+        for data in connectData:
+            print data
+            print "~~~~~~"
 
         while True:
             data = self.bot.getData()
