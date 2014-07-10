@@ -11,9 +11,9 @@
 # python_ver = 2.7.6
 # =============================================================================
 
-import src.bot
+import src.bot as bot
 
 
 if __name__ == "__main__":
-    gbot = IRCBot(server="chat.freenode.com", nick="gbot", port=6667, realName='gbot', identify='', debug=True, connectDelay=4)
+    gbot = bot.IRCBot(server="chat.freenode.com", nick="gbot", port=6667, realName='gbot', identify='', debug=True, connectDelay=4)
     gbot.run()
