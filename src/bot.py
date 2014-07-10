@@ -20,7 +20,7 @@ class IRCBot:
     Takes in args to use for interacting with an IRC server
     """
 
-    def __init__(self, server, nick, port=6667, realName='', identify='', debug=False, connectDelay=2):
+    def __init__(self, server, nick, port=6667, realName='', identify='', connectDelay=2, debug=False, ircDebug=False):
         """
         Initialize the IRC server object
 
@@ -31,8 +31,9 @@ class IRCBot:
             port (int): port number that the IRC server runs on
             realName (str, optional): real name to send to the server, uses the nick by default
             identify (str, optional): nickserv password
-            debug (boolean, optional): enable debug printing
             connectDelay (int, optional): number of seconds to wait for the IRC server to repond when connecting
+            debug (boolean, optional): enable debug printing for bot side
+            ircDebug (boolean, optional): enable debug printing for irc side
 
         Returns:
             None
@@ -41,7 +42,7 @@ class IRCBot:
             None
         """
         self.debug = debug
-        self.bot = irc.IRCClient(server, nick, port, realName, identify, debug, connectDelay)
+        self.bot = irc.IRCClient(server, nick, port, realName, identify, ircDebug, connectDelay)
 
     def run(self):
         """
