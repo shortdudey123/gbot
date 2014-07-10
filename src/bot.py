@@ -136,6 +136,10 @@ class IRCBot:
         while True:
             data = self.bot.getData()
 
+            # connection died for some reason
+            if not data:
+                exit()
+
             lines, splitLinesLeftover = self.splitLines(data, splitLinesLeftover)
             for line in lines:
                 self.parseLine(line)
