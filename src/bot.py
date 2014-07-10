@@ -108,6 +108,7 @@ class IRCBot:
 
         if len(line) ==2 and line.split()[0] == "PING":
             pong(line.split()[1])
+            print "{0} [INFO] Sending pong".format(now)
 
         return
 
@@ -134,8 +135,6 @@ class IRCBot:
 
         while True:
             data = self.bot.getData()
-            now = datetime.datetime.now()
-            print now
 
             lines, splitLinesLeftover = self.splitLines(data, splitLinesLeftover)
             for line in lines:
