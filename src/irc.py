@@ -61,18 +61,22 @@ class IRCClient:
             self (object): this python object instance
 
         Returns:
-            None
+            retData (list): data received from the server while connecting
 
         Raises:
             None
         """
+        retData = []
         self.irc.connect((self.server,self.port))
 
         # need to wait for the server to respond
         time.sleep(self.connectDelay)
 
+        data = self.getData()
+        retData.append(data)
+
         if self.debug:
-            print self.getData()
+            print data
             print "~~~~~~~~~~~~~~"
 
         self.irc.send("USER {0} * 0 :{1}\n".format(self.nick, self.realName))
@@ -84,11 +88,14 @@ class IRCClient:
         # need to wait for the server to respond
         time.sleep(self.connectDelay)
 
+        data = self.getData()
+        retData.append(data)
+
         if self.debug:
-            print self.getData()
+            print data
             print "~~~~~~~~~~~~~~"
 
-        return
+        return retData
 
     def disconnectFromServer(self):
         """
