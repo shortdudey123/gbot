@@ -43,40 +43,6 @@ class IRCBot:
         self.debug = debug
         self.bot = irc.IRCClient(server, nick, port, realName, identify, ircDebug, connectDelay)
 
-    def run(self):
-        """
-        Run the bot
-
-        Args:
-            None
-
-        Returns:
-            None
-
-        Raises:
-            None
-        """
-        splitLinesLeftover = ''
-        connectData = self.bot.connectToServer()
-
-        for data in connectData:
-            lines, splitLinesLeftover = splitLines(data, splitLinesLeftover)
-            for line in lines:
-                print line
-                print "~~~~~~"
-
-        while True:
-            data = self.bot.getData()
-            now = datetime.datetime.now()
-            print now
-
-            lines, splitLinesLeftover = splitLines(data, splitLinesLeftover)
-            for line in lines:
-                print line
-                print "~~~~~~"
-
-        return
-
     def splitLines(self, lines, leftover=''):
         """
         Splits up the data received into lines
@@ -110,6 +76,40 @@ class IRCBot:
 
     def parseLine(self, line):
         pass
+
+    def run(self):
+        """
+        Run the bot
+
+        Args:
+            None
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        splitLinesLeftover = ''
+        connectData = self.bot.connectToServer()
+
+        for data in connectData:
+            lines, splitLinesLeftover = splitLines(data, splitLinesLeftover)
+            for line in lines:
+                print line
+                print "~~~~~~"
+
+        while True:
+            data = self.bot.getData()
+            now = datetime.datetime.now()
+            print now
+
+            lines, splitLinesLeftover = splitLines(data, splitLinesLeftover)
+            for line in lines:
+                print line
+                print "~~~~~~"
+
+        return
 
 if __name__ == "__main__":
     filename = __file__.split('.')[0]
