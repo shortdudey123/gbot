@@ -107,7 +107,7 @@ class IRCBot:
         print "{0} {1}".format(now, line)
 
         if len(line.split()) == 2 and line.split()[0] == "PING":
-            self.irc.pong(line.split()[1])
+            self.irc.sendPong(line.split()[1])
             print "{0} [INFO] Sending pong".format(now)
 
         return
