@@ -40,7 +40,7 @@ class IRCBot:
             None
         """
 
-        self.bot = IRCClient(server, nick, port, realName, identify, debug, connectDelay)
+        self.bot = irc.IRCClient(server, nick, port, realName, identify, debug, connectDelay)
 
     def run(self):
         """
