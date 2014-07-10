@@ -75,7 +75,7 @@ class IRCBot:
         Raises:
             None
         """
-        log("Set default channels to: {0}".format(channels))
+        self.log("Set default channels to: {0}".format(channels))
         self.channels = channels
         return
 
@@ -92,7 +92,7 @@ class IRCBot:
         Raises:
             None
         """
-        log("Joining default channels")
+        self.log("Joining default channels")
         for channel in self.channels.keys():
             self.joinChannel(channel, self.channels[channel])
         return
@@ -159,7 +159,7 @@ class IRCBot:
             None
         """
         self.bot.joinChannel(channel, key)
-        log("Joining {0}".format(channel))
+        self.log("Joining {0}".format(channel))
 
     def parseLine(self, line):
         """
