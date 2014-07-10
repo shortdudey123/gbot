@@ -75,7 +75,21 @@ class IRCBot:
         return retLines, leftover
 
     def parseLine(self, line):
-        pass
+        """
+        Parses the lines received from the server
+
+        Args:
+            line (str): string data containing a single line from the server
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        now = datetime.datetime.now()
+        print "{0} {1}".format(now, line)
+        return
 
     def run(self):
         """
@@ -96,8 +110,7 @@ class IRCBot:
         for data in connectData:
             lines, splitLinesLeftover = self.splitLines(data, splitLinesLeftover)
             for line in lines:
-                print line
-                print "~~~~~~"
+                self.parseLine(line)
 
         while True:
             data = self.bot.getData()
@@ -106,8 +119,7 @@ class IRCBot:
 
             lines, splitLinesLeftover = self.splitLines(data, splitLinesLeftover)
             for line in lines:
-                print line
-                print "~~~~~~"
+                self.parseLine(line)
 
         return
 
