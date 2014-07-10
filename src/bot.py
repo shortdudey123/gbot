@@ -59,9 +59,10 @@ class IRCBot:
         self.bot.connectToServer()
 
         while True:
+            data = self.bot.getData()
             now = datetime.datetime.now()
             print now
-            print self.bot.getData()
+            print data
 
         return
 
