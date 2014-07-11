@@ -180,6 +180,13 @@ class IRCBot:
             self.bot.sendPong(line.split()[1])
             self.log("Sending pong")
 
+        elif len(line.split()) >= 2 and line.split()[0] == "ERROR":
+            self.log("{0}".format(line), level="ERROR")
+
+
+        elif len(line.split()) >= 2 and line.split()[0] == "NOTICE":
+            self.log("{0}".format(line), level="WARNING")
+
         return
 
     def run(self):
