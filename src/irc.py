@@ -146,6 +146,28 @@ class IRCClient:
 
         return
 
+    def sendMessageSpecial(self, message, needDataBack = False):
+        """
+        Send a message to the server that is not already defined
+
+        Args:
+            message (str): message to send to the server
+            needDataBack (boolean, optional): set True is you need the response of the server
+
+        Returns:
+            str: string of the data reseived from the server
+
+        Raises:
+            None
+        """
+        retData = ''
+        self.irc.send("PRIVMSG {0} : {1}\n".format(channel, message))
+
+        if needDataBack:
+            retData = self.getData()
+
+        return retData
+
     def joinChannel(self, channel, key=''):
         """
         Join a given channel
