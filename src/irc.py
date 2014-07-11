@@ -266,6 +266,21 @@ class IRCClient:
         """
         return self.channelPrefixes
 
+    def getNick(self):
+        """
+        Gives the nick used for IRC connection
+
+        Args:
+            None
+
+        Returns:
+            str: nick assigned to connection
+
+        Raises:
+            None
+        """
+        return self.nick
+
 
     def setChannelPrefixes(self, prefixes):
         """
