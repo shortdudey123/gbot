@@ -245,9 +245,9 @@ class IRCBot:
             adminCode = self.isAdminAndIdent(sourceNick)
             if adminCode == 3:
                 self.bot.sendMessage(channel, "Bye", nick)
-            elif adminCode = 1:
+            elif adminCode == 1:
                 self.bot.sendMessage(channel, "You need to IDENTIFY with NickServ to do that", nick)
-            elif adminCode = 0:
+            elif adminCode == 0:
                 self.bot.sendMessage(channel, "You are not authorized to do that", nick)
 
         return
