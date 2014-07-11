@@ -310,7 +310,7 @@ class IRCClient:
                 if int(statusCode) == 3:
                     retIsIdentified = True
             except Exception:
-                raise Exception("Unabled to read the status code")
+                raise Exception("Unabled to read the status code of {0}".format(nick))
 
         return retIsIdentified
 
