@@ -176,7 +176,7 @@ class IRCBot:
         Raises:
             None
         """
-        self.log("Parsing bot message: {0} {1} {2}".format(channel, message, nick))
+        self.log("Parsing bot message: {0} {1} {2}".format(channel, message, nick), level="DEBUG")
         self.bot.sendMessage(channel, message, nick)
         return
 
@@ -224,7 +224,7 @@ class IRCBot:
 
             # PRIVMSG was sent to a channel
             if destination[0] in self.bot.getChannelPrefixes():
-                self.log("PRIVMSG from {0} under {1} on {2} in {3}".format(sourceNick, sourceUser, sourceHost, destination))
+                self.log("PRIVMSG from {0} under {1} on {2} in {3}".format(sourceNick, sourceUser, sourceHost, destination), level="DEBUG")
 
                 # see if the message in the channel was directed at the bot
                 if line.split()[3] == ':{0}:'.format(self.bot.getNick()):
@@ -233,7 +233,7 @@ class IRCBot:
 
             # PRIVMSG was sent straight to the bot
             else:
-                self.log("PRIVMSG from {0} under {1} on {2} at {3}".format(sourceNick, sourceUser, sourceHost, destination))
+                self.log("PRIVMSG from {0} under {1} on {2} at {3}".format(sourceNick, sourceUser, sourceHost, destination), level="DEBUG")
                 message = ' '.join(line.split()[3:])
 
                 # the message should be preceded by a : that needs to be removed
