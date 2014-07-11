@@ -267,7 +267,22 @@ class IRCClient:
             str: True for connected, False for diconnected
 
         Raises:
-            None
+            Exception: if NickServ is queried and the status code is not an int
+
+        Note:
+            This is based on info from http://stackoverflow.com/questions/1682920/determine-if-a-user-is-idented-on-irc
+
+            The answer is in the form ACC :
+                0 - account or user does not exist
+                1 - account exists but user is not logged in
+                2 - user is not logged in but recognized (see ACCESS)
+                3 - user is logged in
+
+            The answer is in the form STATUS :
+                0 - no such user online or nickname not registered
+                1 - user not recognized as nickname's owner
+                2 - user recognized as owner via access list only
+                3 - user recognized as owner via password identification
         """
         retIsIdentified = False
         statusCode = ''
@@ -276,19 +291,26 @@ class IRCClient:
         if self.identVerifyCall == '':
             retIsIdentified = True
 
-        elif self.identVerifyCall == 'ACC':
-            data = self.sendMessageSpecial("PRIVMSG NickServ ACC {0}".format(nick), needDataBack = True)
-            print 'data: {0}'.format(data)
-            if len(data) >= 5:
-                statusCode = data.split()[5]
+        # validation is possible
+        else:
 
-        elif self.identVerifyCall == 'STATUS':
-            data = self.sendMessageSpecial("PRIVMSG NickServ STATUS {0}".format(nick), needDataBack = True)
-            print 'data: {0}'.format(data)
-            if len(data) >= 4:
-                statusCode = data.split()[3]
-        if statusCode != '':
-            print 'statusCode: {0}'.format(statusCode)
+            elif self.identVerifyCall == 'ACC':
+                data = self.sendMessageSpecial("PRIVMSG NickServ ACC {0}".format(nick), needDataBack = True)
+                if len(data) >= 5:
+                    statusCode = data.split()[5]
+
+            elif self.identVerifyCall == 'STATUS':
+                data = self.sendMessageSpecial("PRIVMSG NickServ STATUS {0}".format(nick), needDataBack = True)
+                print 'data: {0}'.format(data)
+                if len(data) >= 4:
+                    statusCode = data.split()[3]
+                    print 'statusCode: {0}'.format(statusCode)
+
+            try:
+                if int(statusCode) == 3:
+                    retIsIdentified
+            except Exception:
+                raise Exception("Unabled to read the status code")
 
         return retIsIdentified
 
