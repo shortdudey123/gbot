@@ -20,7 +20,7 @@ class IRCBot:
     Takes in args to use for interacting with an IRC server
     """
 
-    def __init__(self, server, nick, port=6667, realName='', identify='', connectDelay=2, debug=False, ircDebug=False):
+    def __init__(self, server, nick, port=6667, realName='', identify='', connectDelay=2, debug=False, ircDebug=False, identVerifyCall=''):
         """
         Initialize the IRC server object
 
@@ -41,7 +41,7 @@ class IRCBot:
             None
         """
         self.debug = debug
-        self.bot = irc.IRCClient(server, nick, port, realName, identify, ircDebug, connectDelay)
+        self.bot = irc.IRCClient(server, nick, port, realName, identify, ircDebug, connectDelay, identVerifyCall)
         self.channels = {}
 
     def log(self, message, level="INFO"):
