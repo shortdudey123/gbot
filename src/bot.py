@@ -209,6 +209,30 @@ class IRCBot:
 
         return retCode
 
+    def adminCheckFailed(self, channel, message, nick, adminCode):
+        """
+        Verifies an admin and their identity
+
+        Args:
+            nick (str): nick to verify
+
+        Returns:
+            int: 0 - not admin
+                 1 - admin, but not ident
+                 2 - admin, but can't validate ident
+                 3 - admin and valid ident
+
+        Raises:
+            None
+        """
+        if adminCode == 2:
+            self.bot.sendMessage(channel, "Your IDENTIFY with NickServ could not be determined", nick)
+        elif adminCode == 1:
+            self.bot.sendMessage(channel, "You need to IDENTIFY with NickServ to do that", nick)
+        elif adminCode == 0:
+            self.bot.sendMessage(channel, "You are not authorized to do that", nick)
+        return
+
     def parseLinePrivmsg(self, channel, message, nick=''):
         """
         Parses the PRIVMSG received from the server
@@ -246,10 +270,8 @@ class IRCBot:
             if adminCode == 3:
                 self.bot.sendMessage(channel, "Bye", nick)
                 self.bot.disconnectFromServer()
-            elif adminCode == 1:
-                self.bot.sendMessage(channel, "You need to IDENTIFY with NickServ to do that", nick)
-            elif adminCode == 0:
-                self.bot.sendMessage(channel, "You are not authorized to do that", nick)
+            else:
+                self.adminCheckFailed(self, channel, message, nick, adminCode)
 
         return
 
