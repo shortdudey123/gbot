@@ -20,7 +20,7 @@ class IRCClient:
     Takes in args to use for interacting with an IRC server
     """
 
-    def __init__(self, server, nick, port=6667, realName='', identify='', debug=False, connectDelay=2):
+    def __init__(self, server, nick, port=6667, realName='', identify='', debug=False, connectDelay=2, identVerifyCall=''):
         """
         Initialize the IRC server object
 
@@ -39,6 +39,7 @@ class IRCClient:
         Raises:
             None
         """
+        # greb args
         self.server = server
         self.port = port
         self.nick = nick
@@ -46,13 +47,17 @@ class IRCClient:
         self.identify = identify
         self.connectDelay = connectDelay
         self.realName = realName
-        self.connected = False
         self.actualServer = self.server
-        self.channelPrefixes = ['#', '!', '&', '+']
-        
+        self.identVerifyCall = identVerifyCall
+
         if realName == '':
             self.realName = self.nick
 
+        # set other defaults
+        self.connected = False
+        self.channelPrefixes = ['#', '!', '&', '+']
+
+        # create the socket
         self.irc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def connectToServer(self):
@@ -161,7 +166,7 @@ class IRCClient:
             None
         """
         retData = ''
-        self.irc.send("PRIVMSG {0} : {1}\n".format(channel, message))
+        self.irc.send("{0}\n".format(message))
 
         if needDataBack:
             retData = self.getData()
@@ -250,6 +255,42 @@ class IRCClient:
             None
         """
         return self.connected
+
+    def isIdentified(self, nick):
+        """
+        Gives the connection status of the socket
+
+        Args:
+            nick (str): nick to check IDENTIFY on
+
+        Returns:
+            str: True for connected, False for diconnected
+
+        Raises:
+            None
+        """
+        retIsIdentified = False
+        statusCode = ''
+
+        # no call specified so assume no idenitify validation is possible
+        if self.identVerifyCall == ''
+            retIsIdentified = True
+
+        elif self.identVerifyCall == 'ACC':
+            data = self.sendMessageSpecial("PRIVMSG NickServ ACC {0}".format(nick))
+            print data
+            if len(data) >= 5:
+                statusCode = data[4]
+
+        elif self.identVerifyCall == 'STATUS':
+            data = self.sendMessageSpecial("PRIVMSG NickServ STATUS {0}".format(nick))
+            print data
+            if len(data) >= 4:
+                statusCode = data[3]
+        if statusCode != '':
+            print statusCode
+
+        return retIsIdentified
 
     def setActualServer(self, server):
         """
