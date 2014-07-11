@@ -229,7 +229,7 @@ class IRCBot:
         # use correct arg for nick
         if nick == '':
             sourceNick = channel
-        else
+        else:
             sourceNick = nick
 
         self.bot.sendMessage(channel, message, nick)
