@@ -161,6 +161,24 @@ class IRCBot:
         self.bot.joinChannel(channel, key)
         self.log("Joining {0}".format(channel))
 
+    def parseLinePrivmsg(self, channel, message, nick=''):
+        """
+        Parses the PRIVMSG received from the server
+
+        Args:
+            channel (str): channel (or nick if private message chat)
+            message (str): message for the bot to handle
+            nick (str, optional): nick to highlight in the channel
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        self.bot.sendMessage(channel, message, nick)
+        return
+
     def parseLine(self, line):
         """
         Parses the lines received from the server
@@ -207,9 +225,21 @@ class IRCBot:
             if destination[0] in self.bot.getChannelPrefixes():
                 self.log("PRIVMSG from {0} under {1} on {2} in {3}".format(sourceNick, sourceUser, sourceHost, destination))
 
+                # see if the message in the channel was directed at the bot
+                if destination == ':{0}:'.format(self.nick):
+                    message = ' '.join(line.split()[4:])
+                    self.parseLinePrivmsg(destination, message, sourceNick)
+
             # PRIVMSG was sent straight to the bot
             else:
                 self.log("PRIVMSG from {0} under {1} on {2} at {3}".format(sourceNick, sourceUser, sourceHost, destination))
+                message = ' '.join(line.split()[3:])
+
+                # the message should be preceded by a : that needs to be removed
+                if message[0] == ':':
+                    message = message[1:]
+
+                self.parseLinePrivmsg(sourceNick, message)
 
         return
 
