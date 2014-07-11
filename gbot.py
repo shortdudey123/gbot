@@ -15,6 +15,6 @@ import src.bot as bot
 
 
 if __name__ == "__main__":
-    gbot = bot.IRCBot(server="chat.freenode.com", nick="grbot", port=6667, realName='gbot', identify='', debug=True, connectDelay=4)
+    gbot = bot.IRCBot(server="chat.freenode.com", nick="grbot", port=6667, realName='gbot', identify='', debug=True, connectDelay=4, identVerifyCall='ACC')
     gbot.setDefaultChannels({'##gbot': ''})
     gbot.run()
