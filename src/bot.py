@@ -186,7 +186,7 @@ class IRCBot:
 
 
         # the server send a noticed
-        elif len(line.split()) >= 2 and line.split()[0] == "NOTICE":
+        elif len(line.split()) >= 2 and line.split()[1] == "NOTICE":
             self.log("{0}".format(line), level="WARNING")
 
         # first line of the server welcome response
@@ -194,6 +194,15 @@ class IRCBot:
             server = line.split()[0].split(":")[1]
             self.bot.setActualServer(server)
             self.log("Server is actually {0}".format(server))
+
+        # handle PRIVMSG
+        elif len(line.split()) >= 4 and line.split()[1] == "PRIVMSG":
+            source = line.split()[0].split(":")[1]
+            sourceNick = source.split("!")[0]
+            sourceUser = source.split("!")[1].split("@")[0]
+            sourceHost = source.split("@")[1]
+
+            self.log("PRIVMSG from {0} under {1} on {2}".format(sourceNick, sourceUser, sourceHost))
 
         return
 
