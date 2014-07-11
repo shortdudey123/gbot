@@ -178,6 +178,9 @@ class IRCBot:
         """
         self.log("Parsing bot message: {0} {1} {2}".format(channel, message, nick), level="DEBUG")
         self.bot.sendMessage(channel, message, nick)
+
+        if nick != '':
+            self.bot.isIdentified(nick)
         return
 
     def parseLine(self, line):
