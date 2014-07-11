@@ -278,17 +278,17 @@ class IRCClient:
 
         elif self.identVerifyCall == 'ACC':
             data = self.sendMessageSpecial("PRIVMSG NickServ ACC {0}".format(nick), needDataBack = True)
-            print data
+            print 'data: {0}'.format(data)
             if len(data) >= 5:
-                statusCode = data[4]
+                statusCode = data.split()[4]
 
         elif self.identVerifyCall == 'STATUS':
             data = self.sendMessageSpecial("PRIVMSG NickServ STATUS {0}".format(nick), needDataBack = True)
-            print data
+            print 'data: {0}'.format(data)
             if len(data) >= 4:
-                statusCode = data[3]
+                statusCode = data.split()[3]
         if statusCode != '':
-            print statusCode
+            print 'statusCode: {0}'.format(statusCode)
 
         return retIsIdentified
 
