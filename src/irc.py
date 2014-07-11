@@ -294,7 +294,7 @@ class IRCClient:
         # validation is possible
         else:
 
-            elif self.identVerifyCall == 'ACC':
+            if self.identVerifyCall == 'ACC':
                 data = self.sendMessageSpecial("PRIVMSG NickServ ACC {0}".format(nick), needDataBack = True)
                 if len(data) >= 5:
                     statusCode = data.split()[5]
