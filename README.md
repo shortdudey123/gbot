@@ -1,6 +1,9 @@
 gbot
 ====
 
+Introduction
+------------
+
 IRC bot that can load custom command modules
 
 Questions?
