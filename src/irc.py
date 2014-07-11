@@ -280,7 +280,7 @@ class IRCClient:
             data = self.sendMessageSpecial("PRIVMSG NickServ ACC {0}".format(nick), needDataBack = True)
             print 'data: {0}'.format(data)
             if len(data) >= 5:
-                statusCode = data.split()[4]
+                statusCode = data.split()[5]
 
         elif self.identVerifyCall == 'STATUS':
             data = self.sendMessageSpecial("PRIVMSG NickServ STATUS {0}".format(nick), needDataBack = True)
