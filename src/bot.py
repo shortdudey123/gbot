@@ -227,7 +227,7 @@ class IRCBot:
                 self.log("PRIVMSG from {0} under {1} on {2} in {3}".format(sourceNick, sourceUser, sourceHost, destination))
 
                 # see if the message in the channel was directed at the bot
-                if destination == ':{0}:'.format(self.bot.getNick()):
+                if line.split()[3] == ':{0}:'.format(self.bot.getNick()):
                     message = ' '.join(line.split()[4:])
                     self.parseLinePrivmsg(destination, message, sourceNick)
 
