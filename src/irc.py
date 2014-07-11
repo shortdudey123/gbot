@@ -48,6 +48,7 @@ class IRCClient:
         self.realName = realName
         self.connected = False
         self.actualServer = self.server
+        self.channelPrefixes = ['#', '!', '&', '+']
         
         if realName == '':
             self.realName = self.nick
@@ -247,6 +248,39 @@ class IRCClient:
             None
         """
         self.actualServer = server
+        return
+
+
+    def getChannelPrefixes(self):
+        """
+        Gives the prefixes for channels
+
+        Args:
+            None
+
+        Returns:
+            list: list of single character prefixes
+
+        Raises:
+            None
+        """
+        return self.channelPrefixes
+
+
+    def setChannelPrefixes(self, prefixes):
+        """
+        Override the prefixes for channels
+
+        Args:
+            prefixes (list): list of prefixes
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        self.channelPrefixes = prefixes
         return
 
 if __name__ == "__main__":
