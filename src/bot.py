@@ -44,6 +44,7 @@ class IRCBot:
         self.bot = irc.IRCClient(server, nick, port, realName, identify, ircDebug, connectDelay, identVerifyCall)
         self.channels = {}
         self.admins = []
+        self.loadedModules = []
 
     def log(self, message, level="INFO"):
         """
@@ -234,8 +235,20 @@ class IRCBot:
 
         self.bot.sendMessage(channel, message, nick)
 
-        if self.isAdminAndIdent(sourceNick) == 3:
-            self.bot.sendMessage(channel, "Hello there admin! :)", nick)
+        command = message.split()[0]
+
+        if command in self.loadedModule:
+            # TODO write module code
+            pass
+
+        elif command == 'quit':
+            adminCode = self.isAdminAndIdent(sourceNick)
+            if adminCode == 3:
+                self.bot.sendMessage(channel, "Bye", nick)
+            elif adminCode = 1:
+                self.bot.sendMessage(channel, "You need to IDENTIFY with NickServ to do that", nick)
+            elif adminCode = 0:
+                self.bot.sendMessage(channel, "You are not authorized to do that", nick)
 
         return
 
