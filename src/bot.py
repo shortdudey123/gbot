@@ -43,6 +43,7 @@ class IRCBot:
         self.debug = debug
         self.bot = irc.IRCClient(server, nick, port, realName, identify, ircDebug, connectDelay, identVerifyCall)
         self.channels = {}
+        self.admins = []
 
     def log(self, message, level="INFO"):
         """
@@ -160,6 +161,22 @@ class IRCBot:
         """
         self.bot.joinChannel(channel, key)
         self.log("Joining {0}".format(channel))
+
+    def addAdmin(self, nick):
+        """
+        Parses the PRIVMSG received from the server
+
+        Args:
+            nick (str): nick to add to admin list
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        self.admins.append(nick)
+        return
 
     def parseLinePrivmsg(self, channel, message, nick=''):
         """
