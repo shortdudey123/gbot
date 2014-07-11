@@ -201,8 +201,15 @@ class IRCBot:
             sourceNick = source.split("!")[0]
             sourceUser = source.split("!")[1].split("@")[0]
             sourceHost = source.split("@")[1]
+            destination = line.split()[2]
 
-            self.log("PRIVMSG from {0} under {1} on {2}".format(sourceNick, sourceUser, sourceHost))
+            # PRIVMSG was sent to a channel
+            if destination[0] in self.bot.getChannelPrefixes():
+                self.log("PRIVMSG from {0} under {1} on {2} in {3}".format(sourceNick, sourceUser, sourceHost, destination))
+
+            # PRIVMSG was sent straight to the bot
+            else:
+                self.log("PRIVMSG from {0} under {1} on {2} at {3}".format(sourceNick, sourceUser, sourceHost, destination))
 
         return
 
