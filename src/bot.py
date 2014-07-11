@@ -212,7 +212,7 @@ class IRCBot:
             for line in lines:
                 self.parseLine(line)
 
-        log("{0} has shutdown".format(self.nick))
+        self.log("{0} has shutdown".format(self.nick))
         return
 
 if __name__ == "__main__":
