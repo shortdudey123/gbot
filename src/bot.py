@@ -176,6 +176,7 @@ class IRCBot:
         Raises:
             None
         """
+        self.log("Parsing bot message: {0} {1} {2}".format(channel, message, nick))
         self.bot.sendMessage(channel, message, nick)
         return
 
