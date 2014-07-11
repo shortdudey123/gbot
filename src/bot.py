@@ -181,9 +181,9 @@ class IRCBot:
 
         if nick != '':
             try:
-                self.bot.isIdentified(nick)
+                print self.bot.isIdentified(nick)
             except Exception, e:
-                self.log(e)
+                self.log(e, level="ERROR")
         return
 
     def parseLine(self, line):
