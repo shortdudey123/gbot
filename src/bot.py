@@ -245,6 +245,7 @@ class IRCBot:
             adminCode = self.isAdminAndIdent(sourceNick)
             if adminCode == 3:
                 self.bot.sendMessage(channel, "Bye", nick)
+                self.bot.disconnectFromServer()
             elif adminCode == 1:
                 self.bot.sendMessage(channel, "You need to IDENTIFY with NickServ to do that", nick)
             elif adminCode == 0:
