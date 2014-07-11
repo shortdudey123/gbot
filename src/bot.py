@@ -248,7 +248,7 @@ class IRCBot:
         Raises:
             None
         """
-        self.log("Parsing bot message: {0} {1} {2}".format(channel, message, nick), level="DEBUG")
+        self.log("Parsing bot message: ({0} {1}) {2}".format(channel, nick, message), level="DEBUG")
         sourceNick = ''
 
         # use correct arg for nick
@@ -256,8 +256,6 @@ class IRCBot:
             sourceNick = channel
         else:
             sourceNick = nick
-
-        self.bot.sendMessage(channel, message, nick)
 
         command = message.split()[0]
 
