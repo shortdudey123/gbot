@@ -178,6 +178,36 @@ class IRCBot:
         self.admins.append(nick)
         return
 
+    def isAdminAndIdent(self, nick):
+        """
+        Verifies an admin and their identity
+
+        Args:
+            nick (str): nick to verify
+
+        Returns:
+            int: 0 - not admin
+                 1 - admin, but not ident
+                 2 - admin, but can't validate ident
+                 3 - admin and valid ident
+
+        Raises:
+            None
+        """
+        retCode = 0
+
+        if nick in self.admins:
+            try:
+                if self.bot.isIdentified(nick):
+                    retCode = 3
+                else:
+                    retCode = 1
+            except Exception, e:
+                self.log(e, level="ERROR")
+                retCode = 2
+
+        return retCode
+
     def parseLinePrivmsg(self, channel, message, nick=''):
         """
         Parses the PRIVMSG received from the server
@@ -194,13 +224,19 @@ class IRCBot:
             None
         """
         self.log("Parsing bot message: {0} {1} {2}".format(channel, message, nick), level="DEBUG")
+        sourceNick = ''
+
+        # use correct arg for nick
+        if nick == '':
+            sourceNick = channel
+        else
+            sourceNick = nick
+
         self.bot.sendMessage(channel, message, nick)
 
-        if nick != '':
-            try:
-                print self.bot.isIdentified(nick)
-            except Exception, e:
-                self.log(e, level="ERROR")
+        if self.isAdminAndIdent(sourceNick) == 3:
+            self.bot.sendMessage(channel, "Hello there admin! :)", nick)
+
         return
 
     def parseLine(self, line):
