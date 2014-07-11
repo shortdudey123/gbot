@@ -308,7 +308,7 @@ class IRCClient:
 
             try:
                 if int(statusCode) == 3:
-                    retIsIdentified
+                    retIsIdentified = True
             except Exception:
                 raise Exception("Unabled to read the status code")
 
