@@ -180,7 +180,10 @@ class IRCBot:
         self.bot.sendMessage(channel, message, nick)
 
         if nick != '':
-            self.bot.isIdentified(nick)
+            try:
+                self.bot.isIdentified(nick)
+            except Exception, e:
+                self.log(e)
         return
 
     def parseLine(self, line):
