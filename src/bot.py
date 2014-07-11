@@ -271,7 +271,7 @@ class IRCBot:
                 self.bot.sendMessage(channel, "Bye", nick)
                 self.bot.disconnectFromServer()
             else:
-                self.adminCheckFailed(self, channel, message, nick, adminCode)
+                self.adminCheckFailed(channel, message, nick, adminCode)
 
         return
 
