@@ -273,7 +273,7 @@ class IRCClient:
         statusCode = ''
 
         # no call specified so assume no idenitify validation is possible
-        if self.identVerifyCall == ''
+        if self.identVerifyCall == '':
             retIsIdentified = True
 
         elif self.identVerifyCall == 'ACC':
