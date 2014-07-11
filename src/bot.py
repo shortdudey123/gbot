@@ -180,12 +180,20 @@ class IRCBot:
             self.bot.sendPong(line.split()[1])
             self.log("Sending pong")
 
+        # the server send an error message
         elif len(line.split()) >= 2 and line.split()[0] == "ERROR":
             self.log("{0}".format(line), level="ERROR")
 
 
+        # the server send a noticed
         elif len(line.split()) >= 2 and line.split()[0] == "NOTICE":
             self.log("{0}".format(line), level="WARNING")
+
+        # first line of the server welcome response
+        elif len(line.split()) >= 2 and line.split()[1] == "001":
+            server = line.split()[0].split(":")[1]
+            self.bot.setActualServer(server)
+            self.log("Server is actually {0}".format(server))
 
         return
 

@@ -47,6 +47,7 @@ class IRCClient:
         self.connectDelay = connectDelay
         self.realName = realName
         self.connected = False
+        self.actualServer = self.server
         
         if realName == '':
             self.realName = self.nick
@@ -226,6 +227,27 @@ class IRCClient:
             None
         """
         return self.connected
+
+    def setActualServer(self, server):
+        """
+        Allows the overriding of the servername that the socket is connected to
+
+        Note:
+            This is needed since some server DNS names are CNAME's or contain multiple A records.
+            This can be detected be looking at the first part of the MOTD
+            (i.e. chat.freenode.com)
+
+        Args:
+            server (str): server name of the connection
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        self.actualServer = server
+        return
 
 if __name__ == "__main__":
     filename = __file__.split('.')[0]
