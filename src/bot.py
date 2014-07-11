@@ -205,17 +205,14 @@ class IRCBot:
 
         self.joinDefaultChannels()
 
-        while True:
+        while self.bot.isConnected():
             data = self.bot.getData()
-
-            # connection died for some reason
-            if not data:
-                exit()
 
             lines, splitLinesLeftover = self.splitLines(data, splitLinesLeftover)
             for line in lines:
                 self.parseLine(line)
 
+        log("{0} has shutdown".format(self.nick))
         return
 
 if __name__ == "__main__":
