@@ -46,6 +46,7 @@ class IRCClient:
         self.identify = identify
         self.connectDelay = connectDelay
         self.realName = realName
+        self.connected = False
         
         if realName == '':
             self.realName = self.nick
@@ -67,6 +68,8 @@ class IRCClient:
         """
         retData = []
         self.irc.connect((self.server,self.port))
+
+        self.connected = True
 
         # need to wait for the server to respond
         time.sleep(self.connectDelay)
@@ -111,6 +114,7 @@ class IRCClient:
         """
         self.irc.send('QUIT\n')
         self.irc.close()
+        self.connected = False
         return
 
     def sendMessage(self, channel, message, nick=''):
@@ -204,7 +208,24 @@ class IRCClient:
         """
         # 16kb buffer allows for huge messages (i.e. MOTD)
         data = self.irc.recv(16384)
+        if not data:
+            self.connected = False
         return data
+
+    def isConnected(self):
+        """
+        Gives the connection status of the socket
+
+        Args:
+            None
+
+        Returns:
+            str: True for connected, False for diconnected
+
+        Raises:
+            None
+        """
+        return self.connected
 
 if __name__ == "__main__":
     filename = __file__.split('.')[0]
