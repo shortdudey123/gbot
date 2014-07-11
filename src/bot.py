@@ -237,7 +237,7 @@ class IRCBot:
 
         command = message.split()[0]
 
-        if command in self.loadedModule:
+        if command in self.loadedModules:
             # TODO write module code
             pass
 
