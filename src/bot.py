@@ -53,7 +53,7 @@ class IRCBot:
         self.bot = irc.IRCClient(server, nick, port, realName, identify, ircDebug, connectDelay, identVerifyCall)
         self.channels = {}
         self.admins = []
-        self.loadedModules = []
+        self.loadedModules = {}
 
     def log(self, message, level="INFO"):
         """
@@ -256,6 +256,27 @@ class IRCBot:
         Raises:
             None
         """
+        m = getattr(modules, moduleName)
+        self.loadedModules[m.commandName] = {module = moduleName, admin = m.adminOnly}
+        return
+
+    def callModule(self, commandName, channel, message, nick):
+        """
+        Load the module with the give name
+        i.e. "admin" would load modules/admin.py
+
+        Args:
+            moduleName (str): name of the module (admin would load the admin.py file)
+
+        Returns:
+            str: the command used to call the module
+
+        Raises:
+            None
+        """
+        if commandName in self.loadedModules.keys():
+            m = getattr(modules, self.loadedModules[commandName][module])
+            m.execModule(channel, message, nick, self)
         return
 
     def parseLinePrivmsg(self, channel, message, nick=''):
