@@ -331,7 +331,7 @@ class IRCBot:
             else:
                 self.adminCheckFailed(channel, message, nick, adminCode)
 
-        elif command == 'loadModule' and len(message) == 2:
+        elif command == 'loadModule' and len(message.split()) == 2:
             adminCode = self.isAdminAndIdent(sourceNick)
             if adminCode == 3:
                 moduleName = message[1]
