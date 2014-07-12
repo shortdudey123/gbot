@@ -256,8 +256,16 @@ class IRCBot:
         Raises:
             None
         """
+        # reload everything to dynamically pick up new stuff
+        del modules
+        import modules
+
+        # grab the module
         m = getattr(modules, moduleName)
+
+        # save it
         self.loadedModules[m.commandName] = {'module': moduleName, 'admin': m.adminOnly}
+
         self.log('Loaded module: {0}, {1}, {2}'.format(moduleName, m.commandName, m.adminOnly))
         return
 
@@ -321,6 +329,15 @@ class IRCBot:
             if adminCode == 3:
                 self.bot.sendMessage(channel, "Bye", nick)
                 self.bot.disconnectFromServer()
+            else:
+                self.adminCheckFailed(channel, message, nick, adminCode)
+
+        elif command == 'loadModule' and len(message) == 2:
+            adminCode = self.isAdminAndIdent(sourceNick)
+            if adminCode == 3:
+                moduleName = message[1]
+                self.bot.sendMessage(channel, "Loading {0}...".format(moduleName), nick)
+                self.loadModule(moduleName))
             else:
                 self.adminCheckFailed(channel, message, nick, adminCode)
 
