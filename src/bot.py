@@ -276,7 +276,7 @@ class IRCBot:
             None
         """
         m = getattr(modules, self.loadedModules[commandName][module])
-        self.log('Calling module: {0}, {1}, {2}'.format(self.loadedModules[commandName][module], commandName, self.loadedModules[commandName][admin]))
+        self.log('Calling module: {0}, {1}, {2}'.format(self.loadedModules[commandName]['module'], commandName, self.loadedModules[commandName]['admin']))
         m.execModule(channel, message, nick, self)
         return
 
@@ -307,7 +307,7 @@ class IRCBot:
         command = message.split()[0]
 
         if command in self.loadedModules.keys():
-            if self.loadedModules[command][admin]:
+            if self.loadedModules[command]['admin']:
                 adminCode = self.isAdminAndIdent(sourceNick)
                 if adminCode == 3:
                     self.callModule(command, channel, message, nick)
