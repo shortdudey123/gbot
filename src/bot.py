@@ -258,6 +258,7 @@ class IRCBot:
         """
         m = getattr(modules, moduleName)
         self.loadedModules[m.commandName] = {'module': moduleName, 'admin': m.adminOnly}
+        self.log('Loaded module: {0}, {1}, {2}'.format(moduleName, m.commandName, m.adminOnly))
         return
 
     def callModule(self, commandName, channel, message, nick):
@@ -275,6 +276,7 @@ class IRCBot:
             None
         """
         m = getattr(modules, self.loadedModules[commandName][module])
+        self.log('Calling module: {0}, {1}, {2}'.format(self.loadedModules[commandName][module], commandName, self.loadedModules[commandName][admin]))
         m.execModule(channel, message, nick, self)
         return
 
