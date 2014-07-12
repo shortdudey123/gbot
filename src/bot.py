@@ -257,7 +257,7 @@ class IRCBot:
             None
         """
         m = getattr(modules, moduleName)
-        self.loadedModules[m.commandName] = {module = moduleName, admin = m.adminOnly}
+        self.loadedModules[m.commandName] = {module: moduleName, admin: m.adminOnly}
         return
 
     def callModule(self, commandName, channel, message, nick):
