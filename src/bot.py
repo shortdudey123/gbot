@@ -312,6 +312,7 @@ class IRCBot:
             sourceNick = nick
 
         command = message.split()[0]
+        messageLen = len(message.split())
 
         if command in self.loadedModules.keys():
             if self.loadedModules[command]['admin']:
@@ -323,7 +324,7 @@ class IRCBot:
             else:
                 self.callModule(command, channel, message, sourceNick)
 
-        elif command == 'quit':
+        elif command == 'quit' and messageLen = 1:
             adminCode = self.isAdminAndIdent(sourceNick)
             if adminCode == 3:
                 self.bot.sendMessage(channel, "Bye", nick)
@@ -331,10 +332,10 @@ class IRCBot:
             else:
                 self.adminCheckFailed(channel, message, nick, adminCode)
 
-        elif command == 'loadModule' and len(message.split()) == 2:
+        elif command == 'loadModule' and messageLen == 2:
             adminCode = self.isAdminAndIdent(sourceNick)
             if adminCode == 3:
-                moduleName = message[1]
+                moduleName = message.split()[1]
                 self.bot.sendMessage(channel, "Loading {0}...".format(moduleName), nick)
                 self.loadModule(moduleName)
             else:
