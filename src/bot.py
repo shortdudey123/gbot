@@ -11,8 +11,17 @@
 # python_ver = 2.7.6
 # =============================================================================
 
-import irc
+# python standard
 import datetime
+
+# add one dir up to the path
+import site
+site.addsitedir("../")
+del site
+
+# custom imports
+import irc
+import modules
 
 
 class IRCBot:
@@ -231,6 +240,22 @@ class IRCBot:
             self.bot.sendMessage(channel, "You need to IDENTIFY with NickServ to do that", nick)
         elif adminCode == 0:
             self.bot.sendMessage(channel, "You are not authorized to do that", nick)
+        return
+
+    def loadModule(self, moduleName):
+        """
+        Load the module with the give name
+        i.e. "admin" would load modules/admin.py
+
+        Args:
+            moduleName (str): name of the module (admin would load the admin.py file)
+
+        Returns:
+            str: the command used to call the module
+
+        Raises:
+            None
+        """
         return
 
     def parseLinePrivmsg(self, channel, message, nick=''):
