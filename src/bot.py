@@ -275,7 +275,7 @@ class IRCBot:
         Raises:
             None
         """
-        m = getattr(modules, self.loadedModules[commandName][module])
+        m = getattr(modules, self.loadedModules[commandName]['module'])
         self.log('Calling module: {0}, {1}, {2}'.format(self.loadedModules[commandName]['module'], commandName, self.loadedModules[commandName]['admin']))
         m.execModule(channel, message, nick, self)
         return
