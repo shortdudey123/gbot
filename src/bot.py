@@ -310,11 +310,11 @@ class IRCBot:
             if self.loadedModules[command]['admin']:
                 adminCode = self.isAdminAndIdent(sourceNick)
                 if adminCode == 3:
-                    self.callModule(command, channel, message, nick)
+                    self.callModule(command, channel, message, sourceNick)
                 else:
                     self.adminCheckFailed(channel, message, nick, adminCode)
             else:
-                self.callModule(command, channel, message, nick)
+                self.callModule(command, channel, message, sourceNick)
 
         elif command == 'quit':
             adminCode = self.isAdminAndIdent(sourceNick)
