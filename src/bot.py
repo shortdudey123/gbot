@@ -337,7 +337,7 @@ class IRCBot:
             if adminCode == 3:
                 moduleName = message[1]
                 self.bot.sendMessage(channel, "Loading {0}...".format(moduleName), nick)
-                self.loadModule(moduleName))
+                self.loadModule(moduleName)
             else:
                 self.adminCheckFailed(channel, message, nick, adminCode)
 
