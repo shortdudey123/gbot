@@ -257,8 +257,7 @@ class IRCBot:
             None
         """
         # reload everything to dynamically pick up new stuff
-        del modules
-        import modules
+        reload(modules)
 
         # grab the module
         m = getattr(modules, moduleName)
