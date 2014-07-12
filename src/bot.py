@@ -324,7 +324,7 @@ class IRCBot:
             else:
                 self.callModule(command, channel, message, sourceNick)
 
-        elif command == 'quit' and messageLen = 1:
+        elif command == 'quit' and messageLen == 1:
             adminCode = self.isAdminAndIdent(sourceNick)
             if adminCode == 3:
                 self.bot.sendMessage(channel, "Bye", nick)
