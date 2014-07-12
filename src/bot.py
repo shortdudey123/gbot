@@ -274,9 +274,8 @@ class IRCBot:
         Raises:
             None
         """
-        if commandName in self.loadedModules.keys():
-            m = getattr(modules, self.loadedModules[commandName][module])
-            m.execModule(channel, message, nick, self)
+        m = getattr(modules, self.loadedModules[commandName][module])
+        m.execModule(channel, message, nick, self)
         return
 
     def parseLinePrivmsg(self, channel, message, nick=''):
@@ -305,9 +304,15 @@ class IRCBot:
 
         command = message.split()[0]
 
-        if command in self.loadedModules:
-            # TODO write module code
-            pass
+        if command in self.loadedModules.keys():
+            if self.loadedModules[command][admin]:
+                adminCode = self.isAdminAndIdent(sourceNick)
+                if adminCode == 3:
+                    self.callModule(command, channel, message, nick)
+                else:
+                    self.adminCheckFailed(channel, message, nick, adminCode)
+            else:
+                self.callModule(command, channel, message, nick)
 
         elif command == 'quit':
             adminCode = self.isAdminAndIdent(sourceNick)
