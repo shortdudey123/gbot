@@ -14,9 +14,9 @@
 adminOnly = True
 commandName = 'opme'
 
-def execModule(channel, message, nick, bot):
+def execModule(channel, message, nick, botSelf):
 	retCommands = []
-	bot.sendMessage('ChanServ', '{0} {1}'.format(channel, nick))
+	botSelf.bot.sendMessage('ChanServ', '{0} {1}'.format(channel, nick))
 	return retCommands
 
 if __name__ == "__main__":
