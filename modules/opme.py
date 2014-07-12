@@ -16,6 +16,7 @@ commandName = 'opme'
 
 def execModule(channel, message, nick, bot):
 	retCommands = []
+	bot.sendMessage('ChanServ', '{0} {1}'.format(channel, nick))
 	return retCommands
 
 if __name__ == "__main__":
