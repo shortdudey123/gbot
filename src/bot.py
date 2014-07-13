@@ -265,13 +265,13 @@ class IRCBot:
             m = getattr(modules, moduleName)
 
             # save it
-            self.loadedModules[m.commandName] = {'module': moduleName, 'admin': m.adminOnly}
+            self.loadedModules[m.commandName] = {'module': moduleName, 'admin': m.adminOnly, 'version': m.version}
 
             # Yay it loaded :)
             retLoadedCorrectly = True
 
             # log it
-            self.log('Loaded module: {0}, {1}, {2}'.format(moduleName, m.commandName, m.adminOnly))
+            self.log('Loaded module: {0}, {1}, {2}, {3}'.format(moduleName, m.commandName, m.adminOnly, m.version))
         except AttributeError:
             self.log('Failed to load module: {0}'.format(moduleName), level='WARNING')
 
