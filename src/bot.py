@@ -260,8 +260,14 @@ class IRCBot:
         # reload everything to dynamically pick up new stuff
         reload(modules)
 
-        # grab the module
+        # if the module was already loaded, then we need to reload it
+        for cmd in self.loadedModules.keys():
+            if  self.loadedModules[cmd]['module'] == moduleName:
+                modules.reload(moduleName)
+
+        # try to grab the module and get parameters from it
         try:
+            # grab the module
             m = getattr(modules, moduleName)
 
             # save it
