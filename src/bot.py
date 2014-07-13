@@ -4,7 +4,7 @@
 # description = IRC bot
 # author = GR <https://github.com/shortdudey123>
 # create_date = 2014-07-09
-# mod_date = 2014-07-09
+# mod_date = 2014-07-13
 # version = 0.1
 # usage = called as a class
 # notes =
@@ -22,6 +22,8 @@ del site
 # custom imports
 import irc
 import modules
+
+__CORE_VERSION__ = 0.1
 
 
 class IRCBot:
@@ -54,6 +56,7 @@ class IRCBot:
         self.channels = {}
         self.admins = []
         self.loadedModules = {}
+        self.version = __CORE_VERSION__
 
     def log(self, message, level="INFO"):
         """
@@ -281,6 +284,29 @@ class IRCBot:
         except AttributeError, e:
             self.log('Failed to load module: {0}'.format(moduleName), level='WARNING')
             self.log(e, level='WARNING')
+
+        return retLoadedCorrectly
+
+    def loadModules(self, moduleNames):
+        """
+        Load the module with the give name
+        i.e. "admin" would load modules/admin.py
+
+        Args:
+            moduleNames (list): names of the modules to load
+
+        Returns:
+            boolean: success or failure of loading all the request modules
+
+        Raises:
+            None
+        """
+        retLoadedCorrectly = True
+
+        for moduleName in moduleNames:
+            loadedCorrectly = self.loadModule(moduleName)
+            if loadedCorrectly == False:
+                retLoadedCorrectly = False
 
         return retLoadedCorrectly
 
