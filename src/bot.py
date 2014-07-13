@@ -272,8 +272,9 @@ class IRCBot:
 
             # log it
             self.log('Loaded module: {0}, {1}, {2}, {3}'.format(moduleName, m.commandName, m.adminOnly, m.version))
-        except AttributeError:
+        except AttributeError, e:
             self.log('Failed to load module: {0}'.format(moduleName), level='WARNING')
+            self.log(e, level='WARNING')
 
         return retLoadedCorrectly
 
