@@ -251,22 +251,31 @@ class IRCBot:
             moduleName (str): name of the module (admin would load the admin.py file)
 
         Returns:
-            str: the command used to call the module
+            boolean: success or failure of load
 
         Raises:
             None
         """
+        retLoadedCorrectly = False
         # reload everything to dynamically pick up new stuff
         reload(modules)
 
         # grab the module
-        m = getattr(modules, moduleName)
+        try:
+            m = getattr(modules, moduleName)
 
-        # save it
-        self.loadedModules[m.commandName] = {'module': moduleName, 'admin': m.adminOnly}
+            # save it
+            self.loadedModules[m.commandName] = {'module': moduleName, 'admin': m.adminOnly}
 
-        self.log('Loaded module: {0}, {1}, {2}'.format(moduleName, m.commandName, m.adminOnly))
-        return
+            # Yay it loaded :)
+            retLoadedCorrectly = True
+
+            # log it
+            self.log('Loaded module: {0}, {1}, {2}'.format(moduleName, m.commandName, m.adminOnly))
+        except AttributeError:
+            self.log('Failed to load module: {0}'.format(moduleName))
+
+        return retLoadedCorrectly
 
     def callModule(self, commandName, channel, message, nick):
         """
@@ -337,7 +346,9 @@ class IRCBot:
             if adminCode == 3:
                 moduleName = message.split()[1]
                 self.bot.sendMessage(channel, "Loading {0}...".format(moduleName), nick)
-                self.loadModule(moduleName)
+                didModuleLoad = self.loadModule(moduleName)
+                if didModuleLoad == False:
+                    self.bot.sendMessage(channel, "Failed to load {0}...".format(moduleName), nick)
             else:
                 self.adminCheckFailed(channel, message, nick, adminCode)
 
