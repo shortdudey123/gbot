@@ -411,11 +411,19 @@ class IRCBot:
             self.log("{0}".format(line), level="ERROR")
 
         # invited to a channel
-        elif len(line.split()) >= 2 and line.split()[1] == "INVITE":
+        elif len(line.split()) == 4 and line.split()[1] == "INVITE":
             newChannel = line.split()[3].split(':')[1]
             inviter = line.split()[2]
             self.joinChannel(newChannel)
             self.log("Invited to {0} by {1}".format(newChannel, inviter))
+
+        # kicked from a default channel
+        elif len(line.split()) == 5 and line.split()[1] == "KICK" and line.split()[2] in self.channels.keys():
+            source = line.split()[0].split(":")[1]
+            sourceNick = source.split("!")[0]
+            newChannel = line.split()[2]
+            self.joinChannel(newChannel)
+            self.log("Rejoining default channel {0} since I was kicked by {1}".format(newChannel, sourceNick))
 
         # the server send a noticed
         elif len(line.split()) >= 2 and line.split()[1] == "NOTICE":
