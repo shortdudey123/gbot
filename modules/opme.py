@@ -13,6 +13,7 @@
 
 adminOnly = True
 commandName = 'opme'
+version = 0.1
 
 def execModule(channel, message, nick, botSelf):
 	retCommands = []
