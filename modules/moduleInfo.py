@@ -4,7 +4,7 @@
 # description = gbot module
 # author = GR <https://github.com/shortdudey123>
 # create_date = 2014-07-12
-# mod_date = 2014-07-12
+# mod_date = 2014-07-13
 # version = 0.1
 # usage = loaded by gbot
 # notes =
