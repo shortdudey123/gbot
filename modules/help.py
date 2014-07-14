@@ -24,7 +24,11 @@ Version: {2}
 def execModule(channel, message, nick, botSelf):
     retCommands = []
     if len(message.split()) == 1:
+        commands = ', '.join(botSelf.loadedModules.keys())
+
         botSelf.bot.sendMessage(channel, 'I am an instance of gbot (https://github.com/shortdudey123/gbot)')
+        botSelf.bot.sendMessage(channel, 'Commands: {0]'.format(commands))
+        botSelf.bot.sendMessage(channel, 'For help on the commands: help <command>')
     elif len(message.split()) == 2 and message.split()[1] in botSelf.loadedModules.keys():
         for line in botSelf.loadedModules[message.split()[1]]['help'].split('\n'):
             botSelf.bot.sendMessage(channel, line)
