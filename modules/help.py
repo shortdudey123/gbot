@@ -13,7 +13,7 @@
 
 adminOnly = False
 commandName = 'help'
-version = 0.1
+version = 0.2
 help = """
 Gets help for the modules
 Usage: {0} <command>
@@ -23,8 +23,11 @@ Version: {2}
 
 def execModule(channel, message, nick, botSelf):
     retCommands = []
-    if message == ''
+    if message == '':
         botSelf.bot.sendMessage(channel, 'I am an instance of gbot (https://github.com/shortdudey123/gbot)')
+    elif message[1] in botSelf.loadedModules.keys():
+        for line in botSelf.loadedModules[message[1]].split('\n')
+            botSelf.bot.sendMessage(channel, line)
     return retCommands
 
 if __name__ == "__main__":
