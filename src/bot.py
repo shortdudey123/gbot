@@ -274,7 +274,7 @@ class IRCBot:
             m = getattr(modules, moduleName)
 
             # save it
-            self.loadedModules[m.commandName] = {'module': moduleName, 'admin': m.adminOnly, 'version': m.version}
+            self.loadedModules[m.commandName] = {'module': moduleName, 'admin': m.adminOnly, 'version': m.version, 'help': m.help.strip('\n')}
 
             # Yay it loaded :)
             retLoadedCorrectly = True
