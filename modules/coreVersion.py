@@ -14,6 +14,12 @@
 adminOnly = False
 commandName = 'version'
 version = 0.1
+help = """
+Displays the version of the bot core
+Usage: {0}
+Admin Only: {1}
+Version: {2}
+""".format(commandName, adminOnly, version)
 
 def execModule(channel, message, nick, botSelf):
 	retCommands = []

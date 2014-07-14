@@ -14,6 +14,12 @@
 adminOnly = False
 commandName = 'help'
 version = 0.1
+help = """
+Gets help for the modules
+Usage: {0} <command>
+Admin Only: {1}
+Version: {2}
+""".format(commandName, adminOnly, version)
 
 def execModule(channel, message, nick, botSelf):
 	retCommands = []

@@ -14,6 +14,12 @@
 adminOnly = True
 commandName = 'opme'
 version = 0.1
+help = """
+Gives the requestor op
+Usage: {0}
+Admin Only: {1}
+Version: {2}
+""".format(commandName, adminOnly, version)
 
 def execModule(channel, message, nick, botSelf):
 	retCommands = []
