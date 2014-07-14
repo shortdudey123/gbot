@@ -22,9 +22,10 @@ Version: {2}
 """.format(commandName, adminOnly, version)
 
 def execModule(channel, message, nick, botSelf):
-	retCommands = []
-	botSelf.bot.sendMessage(channel, 'I am an instance of gbot (https://github.com/shortdudey123/gbot)')
-	return retCommands
+    retCommands = []
+    if message == ''
+        botSelf.bot.sendMessage(channel, 'I am an instance of gbot (https://github.com/shortdudey123/gbot)')
+    return retCommands
 
 if __name__ == "__main__":
     filename = __file__.split('.')[0]

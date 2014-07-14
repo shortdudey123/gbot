@@ -22,9 +22,9 @@ Version: {2}
 """.format(commandName, adminOnly, version)
 
 def execModule(channel, message, nick, botSelf):
-	retCommands = []
-	botSelf.bot.sendMessage(channel, 'I am running core version {0}'.format(botSelf.version))
-	return retCommands
+    retCommands = []
+    botSelf.bot.sendMessage(channel, 'I am running core version {0}'.format(botSelf.version))
+    return retCommands
 
 if __name__ == "__main__":
     filename = __file__.split('.')[0]
