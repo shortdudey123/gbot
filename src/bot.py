@@ -199,18 +199,23 @@ class IRCBot:
             owner (boolean, optional): owner(s) of the bot (shoud not be removed from the admins list once set)
 
         Returns:
-            None
+            boolean: False if nick is alrady in the list, otherwise true
 
         Raises:
             None
         """
-        self.admins.append(nick)
-        self.log('Added admin: {0}'.format(nick))
+        retAdminAdded = True
+        if nick not in self.admins:
+            self.admins.append(nick)
+            self.log('Added admin: {0}'.format(nick))
 
-        if owner:
-            self.owners.append(nick)
-            self.log('Added owner: {0}'.format(nick))
-        return
+            if owner:
+                self.owners.append(nick)
+                self.log('Added owner: {0}'.format(nick))
+        else:
+            retAdminAdded = False
+            self.log('Add admin failed since the nick is already an admin: {0}'.format(nick))
+        return retAdminAdded
 
     def deleteAdmin(self, nick):
         """

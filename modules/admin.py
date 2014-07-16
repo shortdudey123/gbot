@@ -30,7 +30,10 @@ def execModule(channel, message, nick, botSelf):
     elif len(message.split()) == 3:
         adminNick = message.split()[2]
         if message.split()[1].lower() == 'add':
-            botSelf.addAdmin(adminNick)
+            if botSelf.addAdmin(adminNick):
+                botSelf.bot.sendMessage(channel, 'Added an admin: {0}'.format(adminNick))
+            else:
+                botSelf.bot.sendMessage(channel, '{0} is already an admin!'.format(adminNick))
         if message.split()[1].lower() == 'del':
             try:
                 delMsg = botSelf.deleteAdmin(adminNick)
