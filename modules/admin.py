@@ -25,18 +25,18 @@ Note: this requires the bot to be op in the channel
 def execModule(channel, message, nick, botSelf):
     retCommands = []
     if len(message.split()) == 2 and message.split()[1].lower() == 'list':
-    	admins = ','.join(botSelf.admins)
+        admins = ','.join(botSelf.admins)
         botSelf.bot.sendMessage(channel, 'Admins: {0}'.format(admins))
-	elif len(message.split()) == 4:
-		adminNick = message.split()[3]
-		if message.split()[2].lower() == 'add':
-			botSelf.addAdmin(adminNick)
-		if message.split()[2].lower() == 'del':
-			try:
-				delMsg = botSelf.deleteAdmin(adminNick)
-				botSelf.bot.sendMessage(channel, '{0}'.format(delMsg))
-			except Exception, e:
-				botSelf.bot.sendMessage(channel, '{0}'.format(e))
+    elif len(message.split()) == 4:
+        adminNick = message.split()[3]
+        if message.split()[2].lower() == 'add':
+            botSelf.addAdmin(adminNick)
+        if message.split()[2].lower() == 'del':
+            try:
+                delMsg = botSelf.deleteAdmin(adminNick)
+                botSelf.bot.sendMessage(channel, '{0}'.format(delMsg))
+            except Exception, e:
+                botSelf.bot.sendMessage(channel, '{0}'.format(e))
 
     return retCommands
 
