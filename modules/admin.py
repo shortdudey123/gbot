@@ -26,7 +26,7 @@ def execModule(channel, message, nick, botSelf):
     retCommands = []
     if len(message.split()) == 2 and message.split()[1].lower() == 'list':
         botSelf.bot.sendMessage(channel, 'Admins: {0}'.format(' '.join(botSelf.admins)))
-        botSelf.bot.sendMessage(channel, 'Admins: {0}'.format(' '.join(botSelf.owners)))
+        botSelf.bot.sendMessage(channel, 'Owners: {0}'.format(' '.join(botSelf.owners)))
     elif len(message.split()) == 3:
         adminNick = message.split()[2]
         if message.split()[1].lower() == 'add':
