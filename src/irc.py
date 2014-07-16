@@ -14,6 +14,7 @@
 import socket
 import time
 
+__IRC_LIB_VERSION__ = 0.1
 
 class IRCClient:
     """
@@ -61,6 +62,21 @@ class IRCClient:
 
         # create the socket
         self.irc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    def getVersion(self):
+        """
+        Gets the version of the IRC lib
+
+        Args:
+            None
+
+        Returns:
+            version (int): version number of IRC lib
+
+        Raises:
+            None
+        """
+        return __IRC_LIB_VERSION__
 
     def connectToServer(self):
         """
