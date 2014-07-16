@@ -56,6 +56,7 @@ class IRCBot:
         self.channels = {}
         self.admins = []
         self.loadedModules = {}
+        self.owners = []
 
     def getVersion(self):
         """
@@ -189,12 +190,13 @@ class IRCBot:
         self.bot.joinChannel(channel, key)
         self.log("Joining {0}".format(channel))
 
-    def addAdmin(self, nick):
+    def addAdmin(self, nick, owner=False):
         """
         Parses the PRIVMSG received from the server
 
         Args:
             nick (str): nick to add to admin list
+            owner (boolean, optional): owner(s) of the bot (shoud not be removed from the admins list once set)
 
         Returns:
             None
@@ -203,7 +205,37 @@ class IRCBot:
             None
         """
         self.admins.append(nick)
+        log('Added admin: {0}'.format(nick))
+
+        if owner:
+            self.owners.append(nick)
+            log('Added owner: {0}'.format(nick))
         return
+
+    def deleteAdmin(self, nick):
+        """
+        Remove the given nick from the admin list
+
+        Args:
+            nick (str): nick to add to admin list
+            owner (boolean, optional): owner(s) of the bot (shoud not be removed from the admins list once set)
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        # verify the nick is not an owner
+        if nick in self.owners:
+            raise Exception("You can't remove an owner from the admin list!")
+        else:
+            try:
+                self.admins.remove(nick)
+            log('Removed admin: {0}'.format(nick))
+            except ValueError, e:
+                raise Exception("{0} is not an admin!".format(nick))
+        return 'Removed {0} from the admin list'.format(nick)
 
     def isAdminAndIdent(self, nick):
         """
