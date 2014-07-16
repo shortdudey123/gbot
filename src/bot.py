@@ -233,7 +233,7 @@ class IRCBot:
         else:
             try:
                 self.admins.remove(nick)
-            self.log('Removed admin: {0}'.format(nick))
+                self.log('Removed admin: {0}'.format(nick))
             except ValueError, e:
                 raise Exception("{0} is not an admin!".format(nick))
                 self.log('Could not remove an admin since they are not in the list: {0}'.format(nick))
