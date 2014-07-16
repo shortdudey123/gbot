@@ -15,8 +15,8 @@ adminOnly = True
 commandName = 'setTopic'
 version = 0.1
 help = """
-Gives the requestor op
-Usage: {0}
+Sets the topic of the channel.  Omit the topic param to clear the topic.
+Usage: {0} <topic>
 Admin Only: {1}
 Version: {2}
 Note: this requires the bot to be op in the channel
@@ -25,7 +25,7 @@ Note: this requires the bot to be op in the channel
 def execModule(channel, message, nick, botSelf):
     retCommands = []
     if len(message.split()) >= 2:
-        botSelf.bot.setChannelTopic(channel, '{0}'.format(message.split()[1:]))
+        botSelf.bot.setChannelTopic(channel, '{0}'.format(' '.join(message.split()[1:])))
     elif len(message.split()) == 1:
         botSelf.bot.setChannelTopic(channel)
     return retCommands
