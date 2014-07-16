@@ -366,13 +366,13 @@ class IRCClient:
             self.irc.send("MODE {0} {1} {2}\n".format(channel, mode, param))
         return
 
-    def setChannelTopic(self, channel, topic):
+    def setChannelTopic(self, channel, topic=''):
         """
         Set the topic for the given channel
 
         Args:
             channel (str): channel to part
-            topic (str): new topic for the channel
+            topic (str, optional): new topic for the channel (clears topic if not set)
 
         Returns:
             None
@@ -380,7 +380,10 @@ class IRCClient:
         Raises:
             None
         """
-        self.irc.send("TOPIC {0} {1}\n".format(channel, topic))
+        if topic =='':
+            self.irc.send("TOPIC {0}\n".format(channel))
+        else:
+            self.irc.send("TOPIC {0} {1}\n".format(channel, topic))
         return
 
     def setDebug(self, debug):
