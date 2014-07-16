@@ -56,6 +56,8 @@ class IRCClient:
         # set other defaults
         self.connected = False
         self.channelPrefixes = ['#', '!', '&', '+']
+        self.soccketBufferSizeDefault = 16384
+        self.soccketBufferSize = self.soccketBufferSizeDefault
 
         # create the socket
         self.irc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -124,6 +126,27 @@ class IRCClient:
         self.connected = False
         return
 
+    def _setSocketBufferSize(self, size=''):
+        """
+        Disconnect from the IRC server
+
+        Args:
+            size (int, optional): change the buffer size, change to default if not set
+
+        Returns:
+            boolean: success or failure of change
+
+        Raises:
+            None
+        """
+        if size == '':
+            self.soccketBufferSize = self.soccketBufferSizeDefault
+        elif type(size) == int:
+            self.soccketBufferSize = size
+        else
+            return False
+        return True
+
     def sendMessage(self, channel, message, nick=''):
         """
         Send a message in a given channel
@@ -188,6 +211,35 @@ class IRCClient:
         else:
             self.irc.send("KICK {0} {1} :{2}\n".format(channel, nick, reason))
         return
+
+    def getNames(self, channel='', target=''):
+        """
+        Kick the nick from the given channel
+
+        Args:
+            channel (str, optional): channels to get names for (can be a comma seperated list of channels)
+            target (str, optional): send to a specific server
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        retData = ''
+        if channel == '':
+            self._setSocketBufferSize(self.soccketBufferSizeDefault*10)
+            self.irc.send("NAMES\n")
+            retData = self.getData()
+            self._setSocketBufferSize()
+        else:
+            if target == '':
+                self.irc.send("NAMES {0}\n".format(channel))
+                retData = self.getData()
+            else:
+                self.irc.send("NAMES {0} {1}\n".format(channel, target))
+                retData = self.getData()
+        return retData
 
     def sendMessageSpecial(self, message, needDataBack = False):
         """
@@ -332,7 +384,7 @@ class IRCClient:
             None
         """
         # 16kb buffer allows for huge messages (i.e. MOTD)
-        data = self.irc.recv(16384)
+        data = self.irc.recv(self.soccketBufferSize)
         if not data:
             self.connected = False
         return data
