@@ -151,6 +151,44 @@ class IRCClient:
 
         return
 
+    def sendMessageInvite(self, channel, nick):
+        """
+        Send an channel invite to the given nick
+
+        Args:
+            channel (str): channel to invite the nick to
+            nick (str): nick to invite
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        self.irc.send("INVITE {0} {1}\n".format(nick, channel))
+        return
+
+    def sendMessageKick(self, channel, nick, reason=''):
+        """
+        Kick the nick from the given channel
+
+        Args:
+            channel (str): channel to invite the nick to
+            nick (str): nick to invite
+            reason (str, optional): kick message
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        if reason == '':
+            self.irc.send("KICK {0} {1}\n".format(channel, nick))
+        else:
+            self.irc.send("KICK {0} {1} :{2}\n".format(channel, nick, reason))
+        return
+
     def sendMessageSpecial(self, message, needDataBack = False):
         """
         Send a message to the server that is not already defined
@@ -188,6 +226,26 @@ class IRCClient:
             None
         """
         self.irc.send("JOIN {0} {1}\n".format(channel, key))
+        return
+
+    def partChannel(self, channel, reason=''):
+        """
+        Join a given channel
+
+        Args:
+            channel (str): channel to part
+            reason (str, optional): part message
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        if reason == '':
+            self.irc.send("PART {0}\n".format(channel))
+        else:
+            self.irc.send("PART {0} :{1}\n".format(channel, reason))
         return
 
     def setDebug(self, debug):
