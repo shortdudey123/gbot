@@ -25,7 +25,7 @@ Note: this requires the bot to be op in the channel
 def execModule(channel, message, nick, botSelf):
     retCommands = []
     if len(message.split()) == 2 and message.split()[1].lower() == 'list':
-        admins = ','.join(botSelf.admins)
+        admins = ' '.join(botSelf.admins)
         botSelf.bot.sendMessage(channel, 'Admins: {0}'.format(admins))
     elif len(message.split()) == 3:
         adminNick = message.split()[2]
