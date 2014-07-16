@@ -205,11 +205,11 @@ class IRCBot:
             None
         """
         self.admins.append(nick)
-        log('Added admin: {0}'.format(nick))
+        self.log('Added admin: {0}'.format(nick))
 
         if owner:
             self.owners.append(nick)
-            log('Added owner: {0}'.format(nick))
+            self.log('Added owner: {0}'.format(nick))
         return
 
     def deleteAdmin(self, nick):
@@ -229,12 +229,14 @@ class IRCBot:
         # verify the nick is not an owner
         if nick in self.owners:
             raise Exception("You can't remove an owner from the admin list!")
+            self.log('Could not remove an admin since they are an owner: {0}'.format(nick))
         else:
             try:
                 self.admins.remove(nick)
-            log('Removed admin: {0}'.format(nick))
+            self.log('Removed admin: {0}'.format(nick))
             except ValueError, e:
                 raise Exception("{0} is not an admin!".format(nick))
+                self.log('Could not remove an admin since they are not in the list: {0}'.format(nick))
         return 'Removed {0} from the admin list'.format(nick)
 
     def isAdminAndIdent(self, nick):
