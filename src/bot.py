@@ -56,7 +56,21 @@ class IRCBot:
         self.channels = {}
         self.admins = []
         self.loadedModules = {}
-        self.version = __CORE_VERSION__
+
+    def getVersion(self):
+        """
+        Gets the version of the bot core
+
+        Args:
+            None
+
+        Returns:
+            version (int): version number of bot core
+
+        Raises:
+            None
+        """
+        return __CORE_VERSION__
 
     def log(self, message, level="INFO"):
         """
