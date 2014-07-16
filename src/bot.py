@@ -233,6 +233,11 @@ class IRCBot:
                 self.log(e, level="ERROR")
                 retCode = 2
 
+        # if there is no admins set, then we can't determine who should do what so we should disable the admin side
+        # Want all hell to break loose?? Change this from 0 to 3
+        elif len(self.admins) == []:
+            retCode = 0
+
         return retCode
 
     def adminCheckFailed(self, channel, message, nick, adminCode):
