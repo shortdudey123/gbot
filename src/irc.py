@@ -248,6 +248,44 @@ class IRCClient:
             self.irc.send("PART {0} :{1}\n".format(channel, reason))
         return
 
+    def setChannelMode(self, channel, modes, param=''):
+        """
+        Set the mode for the given channel
+
+        Args:
+            channel (str): channel to part
+            modes (str): +/- modes to change
+            param (str, optional): parameters for the mode change (i.e. a key for +k)
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        if param == '':
+            self.irc.send("MODE {0} {1}\n".format(channel, mode))
+        else:
+            self.irc.send("MODE {0} {1} {2}\n".format(channel, mode, param))
+        return
+
+    def setChannelTopic(self, channel, topic):
+        """
+        Set the topic for the given channel
+
+        Args:
+            channel (str): channel to part
+            topic (str): new topic for the channel
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        self.irc.send("TOPIC {0} {1}\n".format(channel, topic))
+        return
+
     def setDebug(self, debug):
         """
         Change debuging status
