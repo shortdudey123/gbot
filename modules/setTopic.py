@@ -25,9 +25,9 @@ Note: this requires the bot to be op in the channel
 def execModule(channel, message, nick, botSelf):
     retCommands = []
     if len(message.split()) >= 2:
-    	botSelf.bot.setChannelTopic(channel, '{0}'.format(message.split()[1:]))
-	elif len(message.split())) == 1:
-		botSelf.bot.setChannelTopic(channel)
+        botSelf.bot.setChannelTopic(channel, '{0}'.format(message.split()[1:]))
+    elif len(message.split()) == 1:
+        botSelf.bot.setChannelTopic(channel)
     return retCommands
 
 if __name__ == "__main__":
