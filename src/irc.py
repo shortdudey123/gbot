@@ -143,7 +143,7 @@ class IRCClient:
             self.soccketBufferSize = self.soccketBufferSizeDefault
         elif type(size) == int:
             self.soccketBufferSize = size
-        else
+        else:
             return False
         return True
 
