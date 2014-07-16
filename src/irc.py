@@ -380,10 +380,7 @@ class IRCClient:
         Raises:
             None
         """
-        if topic =='':
-            self.irc.send("TOPIC {0}\n".format(channel))
-        else:
-            self.irc.send("TOPIC {0} {1}\n".format(channel, topic))
+        self.irc.send("TOPIC {0} :{1}\n".format(channel, topic))
         return
 
     def setDebug(self, debug):
