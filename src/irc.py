@@ -230,14 +230,14 @@ class IRCClient:
 
     def getNames(self, channel='', target=''):
         """
-        Kick the nick from the given channel
+        Get the users connected to the server or in a given channel
 
         Args:
             channel (str, optional): channels to get names for (can be a comma seperated list of channels)
             target (str, optional): send to a specific server
 
         Returns:
-            None
+            str: response from server
 
         Raises:
             None
@@ -254,6 +254,35 @@ class IRCClient:
                 retData = self.getData()
             else:
                 self.irc.send("NAMES {0} {1}\n".format(channel, target))
+                retData = self.getData()
+        return retData
+
+    def getList(self, channel='', target = ''):
+        """
+        Get the channels and their topics
+
+        Args:
+            channel (str, optional): channels to get names for (can be a comma seperated list of channels)
+            target (str, optional): send to a specific server
+
+        Returns:
+            str: response from server
+
+        Raises:
+            None
+        """
+        retData = ''
+        if channel == '':
+            self._setSocketBufferSize(self.soccketBufferSizeDefault*10)
+            self.irc.send("LIST\n")
+            retData = self.getData()
+            self._setSocketBufferSize()
+        else:
+            if target == '':
+                self.irc.send("LIST {0}\n".format(channel))
+                retData = self.getData()
+            else:
+                self.irc.send("LIST {0} {1}\n".format(channel, target))
                 retData = self.getData()
         return retData
 
