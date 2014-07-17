@@ -36,7 +36,7 @@ def execModule(channel, message, nick, botSelf):
     elif len(message.split()) == 2:
         location = message.split()[1]
         weatherInfo = []
-        if len(location) = 3 and re.match(iata_format, location.upper()):
+        if len(location) == 3 and re.match(iata_format, location.upper()):
             requestData = urllib.urlopen('http://services.faa.gov/airport/status/{0}?format=json'.format(location))
             try:
                 data = json.load(requestData)
