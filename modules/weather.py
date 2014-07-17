@@ -38,7 +38,7 @@ def execModule(channel, message, nick, botSelf):
     elif len(message.split()) == 2:
         location = message.split()[1]
         weatherInfo = []
-        self.log("Getting weather info for {0}".format(location.upper()))
+        botSelf.log("Getting weather info for {0}".format(location.upper()))
 
         if len(location) == 3 and re.match(re_iata, location.upper()):
             requestData = urllib.urlopen('http://services.faa.gov/airport/status/{0}?format=json'.format(location))
@@ -50,10 +50,10 @@ def execModule(channel, message, nick, botSelf):
                 weatherInfo.append('Sky: {0}'.format(data['weather']['weather']))
                 weatherInfo.append('Wind: {0}'.format(data['weather']['wind']))
                 weatherInfo.append('Last updated: {0}'.format(data['weather']['meta']['updated']))
-                self.log("Got weather info for IATA {0}".format(location.upper()))
+                botSelf.log("Got weather info for IATA {0}".format(location.upper()))
             except ValueError, e:
                 botSelf.bot.sendMessage(channel, 'Please use a valid IATA airport code (http://www.iata.org/publications/Pages/code-search.aspx or Wikipidia)')
-                self.log("Failed to get weather info for IATA {0}".format(location.upper()))
+                botSelf.log("Failed to get weather info for IATA {0}".format(location.upper()))
 
         elif len(location) == 5 and re.match(re_zipCode, location):
             botSelf.bot.sendMessage(channel, 'Zip codes are not supported yet.  Sorry :(')            
