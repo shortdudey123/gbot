@@ -46,7 +46,7 @@ def execModule(channel, message, nick, botSelf):
                 data = json.load(requestData)
                 weatherInfo.append('{0} ({1}) in {2}, {3}'.format(data['name'], data['IATA'], data['city'], data['state']))
                 weatherInfo.append('Temperature: {0}'.format(data['weather']['temp']))
-                weatherInfo.append('Visibility: {0}m'.format(data['weather']['visibility']))
+                weatherInfo.append('Visibility: {0} miles'.format(data['weather']['visibility']))
                 weatherInfo.append('Sky: {0}'.format(data['weather']['weather']))
                 weatherInfo.append('Wind: {0}'.format(data['weather']['wind']))
                 weatherInfo.append('Last updated: {0}'.format(data['weather']['meta']['updated']))
