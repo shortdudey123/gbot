@@ -42,7 +42,7 @@ Every module has it's own help message.  Example: `mybot: help version`
 
 ## Writing a module
 
-A module can do anything that you want.
+A module can do anything that you want.  If you have a module that you thing should be part of the default modules included in the repo, feel free to let me know! (see the questions section)
 
 ### Skeleton Code
 
