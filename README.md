@@ -4,6 +4,8 @@
 
 IRC bot that can load custom command modules
 
+The bot handles most types of IRC messages including INVITE, NOTICE, ERROR, KICK, and PRIVMSG.
+
 ## Setup
 
 1. Close this repo
@@ -97,6 +99,10 @@ Join a channel: `botSelf.joinChannel(channel, optionalKey)`
 Put something in the log: `botSelf.log(message, optionalLevel)`
 
 Get bot nick: `botSelf.bot.getNick()`
+
+## Other Notes
+
+The bot will auto rejoin a channel if it is kicked and the channel is one its defaults.
 
 ## Questions?
 
