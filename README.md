@@ -74,12 +74,19 @@ Skeleton code:
 	    help(filename)
 
 adminOnly - can restrict the module to only allow admins to call it
+
 commandName - the name you will use to call the module (generally the same as the filename)
+
 version - version number
+
 help - help message displayed when help module is called
+
 channel - source channel of the message (source nick if sidechat)
+
 message - exactly what is sent on IRC minus the bot name.  (EX: `myBot: help version` would be `help version`)
+
 nick - source nick of the command (will be same as channel if source was a side chat)
+
 botSelf - reference to the bot instance (used to call bot commands like sending a message or accessing variables)
 
 Questions?
