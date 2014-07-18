@@ -30,7 +30,7 @@ def execModule(channel, message, nick, botSelf):
         botSelf.bot.sendMessage(channel, 'Commands (built in): loadModule, quit')
         botSelf.bot.sendMessage(channel, 'Commands (modules): {0}'.format(commands))
         botSelf.bot.sendMessage(channel, 'For help on the commands: help <command>')
-        botSelf.bot.sendMessage(channel, 'Note: all commands must be preceded by {0}:'.format(botSelf.bot.nick))
+        botSelf.bot.sendMessage(channel, 'Note: all commands must be preceded by {0}:'.format(botSelf.bot.getNick()))
     elif len(message.split()) == 2 and message.split()[1] in botSelf.loadedModules.keys():
         for line in botSelf.loadedModules[message.split()[1]]['help'].split('\n'):
             botSelf.bot.sendMessage(channel, line)
