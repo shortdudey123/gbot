@@ -14,6 +14,15 @@ Setup
 
 Note: no packages need to be installed.  Everything used is in stdlib.
 
+Sample config
+-------------
+
+    myBot = bot.IRCBot(server="irc.example.com", nick="myBot", port=6667, realName='myBot', identify='myBotPassword', debug=True, connectDelay=4, identVerifyCall='ACC')
+    myBot.setDefaultChannels({'#myBot': ''})
+    myBot.addAdmin("myBotAdminNick", True)
+    myBot.loadModules(['coreVersion', 'moduleInfo', 'help'])
+    myBot.run()
+
 Running the Bot
 ---------------
 
