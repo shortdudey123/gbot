@@ -1,21 +1,17 @@
-gbot
-====
+# gbot
 
-Introduction
-------------
+## Introduction
 
 IRC bot that can load custom command modules
 
-Setup
------
+## Setup
 
 1. Close this repo
 2. Modify gbot.py in the root of the repo to your liking
 
 Note: no packages need to be installed.  Everything used is in stdlib.
 
-Sample config
--------------
+## Sample config
 
 	import src.bot as bot
 
@@ -26,13 +22,11 @@ Sample config
 	    myBot.loadModules(['coreVersion', 'moduleInfo', 'help'])
 	    myBot.run()
 
-Running the Bot
----------------
+## Running the Bot
 
 Run the bot by calling `python gbot.py` in the root of the repo.
 
-Using the Bot
--------------
+## Using the Bot
 
 By default the only commands the bot will support is `quit` and `loadModule`.  
 To load modules on startup, call `.loadModules(['mod1', 'mod2'])` before running the bot.
@@ -44,12 +38,11 @@ All commands must be prefixed with the bot's name and a colon.  Example: `myBot:
 
 Every module has it's own help message.  Example: `mybot: help version`
 
-Writing a module
-----------------
+## Writing a module
 
 A module can do anything that you want.
 
-Skeleton code:
+### Skeleton Code
 
 	adminOnly = True
 	commandName = 'command'
@@ -73,6 +66,8 @@ Skeleton code:
 	    filename = __file__.split('.')[0]
 	    help(filename)
 
+### Skeleton Code Explained
+
 adminOnly - can restrict the module to only allow admins to call it
 
 commandName - the name you will use to call the module (generally the same as the filename)
@@ -89,7 +84,6 @@ nick - source nick of the command (will be same as channel if source was a side 
 
 botSelf - reference to the bot instance (used to call bot commands like sending a message or accessing variables)
 
-Questions?
-----------
+## Questions?
 
 Drop by [##gbot on Freenode](http://webchat.freenode.net/?channels=##gbot)
