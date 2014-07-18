@@ -19,7 +19,7 @@ Note: no packages need to be installed.  Everything used is in stdlib.
 
 	if __name__ == "__main__":
 	    myBot = bot.IRCBot(server="irc.example.com", nick="myBot", port=6667, realName='myBot', identify='myBotPassword', debug=True, connectDelay=4, identVerifyCall='ACC')
-	    myBot.setDefaultChannels({'#myBot': ''})
+	    myBot.setDefaultChannels({'#myBot': 'key', '#myBot2': ''})
 	    myBot.addAdmin("myBotAdminNick", True)
 	    myBot.loadModules(['coreVersion', 'moduleInfo', 'help'])
 	    myBot.run()
