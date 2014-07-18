@@ -88,7 +88,7 @@ botSelf - reference to the bot instance (used to call bot commands like sending 
 
 Send a message to a channel: `botSelf.bot.sendMessage(channel, 'Hi {0}!'.format(nick))`
 
-Send a message to a channel and highlight a nick: `botSelf.bot.sendMessage(channel, 'Hi!'.format(nick)), nick`
+Send a message to a channel and highlight a nick: `botSelf.bot.sendMessage(channel, 'Hi!'.format(nick), nick)`
 
 Send a message to a nick: `botSelf.bot.sendMessage(nick, 'Hi!')`
 
