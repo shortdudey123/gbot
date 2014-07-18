@@ -96,6 +96,8 @@ Join a channel: `botSelf.joinChannel(channel, optionalKey)`
 
 Put something in the log: `botSelf.log(message, optionalLevel)`
 
+Get bot nick: `botSelf.bot.getNick()`
+
 ## Questions?
 
 Drop by [##gbot on Freenode](http://webchat.freenode.net/?channels=##gbot)
