@@ -84,6 +84,18 @@ nick - source nick of the command (will be same as channel if source was a side 
 
 botSelf - reference to the bot instance (used to call bot commands like sending a message or accessing variables)
 
+### Things to go inside the module
+
+Send a message to a channel: `botSelf.bot.sendMessage(channel, 'Hi {0}!'.format(nick))`
+
+Send a message to a channel and highlight a nick: `botSelf.bot.sendMessage(channel, 'Hi!'.format(nick)), nick`
+
+Send a message to a nick: `botSelf.bot.sendMessage(nick, 'Hi!')`
+
+Join a channel: `botSelf.joinChannel(channel, optionalKey)`
+
+Put something in the log: `botSelf.log(message, optionalLevel)`
+
 ## Questions?
 
 Drop by [##gbot on Freenode](http://webchat.freenode.net/?channels=##gbot)
