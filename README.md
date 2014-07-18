@@ -40,6 +40,48 @@ Loading modules after the bot is started can be done with a command in a channel
 
 Note: The module name used to load the module is based on the .py filename and can be different than the command used to actually used the module.
 
+All commands must be prefixed with the bot's name and a colon.  Example: `myBot: help`
+
+Every module has it's own help message.  Example: `mybot: help version`
+
+Writing a module
+----------------
+
+A module can do anything that you want.
+
+Skeleton code:
+
+	adminOnly = True
+	commandName = 'command'
+	version = 0.1
+	help = """
+	Help Message
+	Usage: {0} <options>
+	Admin Only: {1}
+	Version: {2}
+	Note: any notes
+	""".format(commandName, adminOnly, version)
+
+	def execModule(channel, message, nick, botSelf):
+	    retCommands = []
+
+	    # insert code here
+
+	    return retCommands
+
+	if __name__ == "__main__":
+	    filename = __file__.split('.')[0]
+	    help(filename)
+
+adminOnly - can restrict the module to only allow admins to call it
+commandName - the name you will use to call the module (generally the same as the filename)
+version - version number
+help - help message displayed when help module is called
+channel - source channel of the message (source nick if sidechat)
+message - exactly what is sent on IRC minus the bot name.  (EX: `myBot: help version` would be `help version`)
+nick - source nick of the command (will be same as channel if source was a side chat)
+botSelf - reference to the bot instance (used to call bot commands like sending a message or accessing variables)
+
 Questions?
 ----------
 
