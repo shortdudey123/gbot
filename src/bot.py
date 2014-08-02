@@ -303,6 +303,28 @@ class IRCBot:
             self.bot.sendMessage(channel, "You are not authorized to do that", nick)
         return
 
+    def sendMessage(self, channel, message, nick=''):
+        """
+        Pass on parameters to the IRC module.
+
+        Notes:
+            This should only be used when the bot is running as part of another system.
+            Otherwise self.bot.sendMessage() should be called directly
+
+        Args:
+            channel (str): channel to send the message in
+            message (str): message to send
+            nick (str, optional): nick to prefix to the message for highlighting
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
+        self.bot.sendMessage(channel, message, nick)
+        return
+
     def loadModule(self, moduleName):
         """
         Load the module with the give name
