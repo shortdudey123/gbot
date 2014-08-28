@@ -44,7 +44,7 @@ def execModule(channel, message, nick, botSelf):
             requestData = urllib.urlopen('http://services.faa.gov/airport/status/{0}?format=json'.format(location))
             try:
                 data = json.load(requestData)
-                weatherInfo.append('{0} ({1}) in {2}, {3} - {4}, visibility {5} miles, sky is {6}, wind at {7}'.format(data['name'], data['IATA'], data['city'], data['state']), data['weather']['temp']), data['weather']['visibility']), data['weather']['weather']), data['weather']['wind']))
+                weatherInfo.append('{0} ({1}) in {2}, {3} - {4}, visibility {5} miles, sky is {6}, wind at {7}'.format(data['name'], data['IATA'], data['city'], data['state'], data['weather']['temp'], data['weather']['visibility'], data['weather']['weather'], data['weather']['wind']))
                 weatherInfo.append('Last updated: {0}'.format(data['weather']['meta']['updated']))
                 botSelf.log("Got weather info for IATA {0}".format(location.upper()))
             except ValueError, e:
