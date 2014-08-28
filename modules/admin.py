@@ -13,7 +13,7 @@
 
 adminOnly = True
 commandName = 'admin'
-version = 0.1.1
+version = 0.1
 help = """
 View and modify the list of admins for this bot.
 Usage: {0} <list | add nick | del nick>
