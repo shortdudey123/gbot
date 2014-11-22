@@ -6,7 +6,7 @@ import imp
 
 
 # based off of https://github.com/myano/jenni/blob/master/modules/reload.py#L40
-def reload(moduleName):
+def reload_modules(moduleName):
     name = '{0}.{1}'.format(os.path.dirname(__file__).split('/')[-1:][0], moduleName)
     if name in sys.modules.keys():
         filePath = sys.modules[name].__file__

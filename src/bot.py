@@ -347,7 +347,7 @@ class IRCBot(object):
         # if the module was already loaded, then we need to reload it
         for cmd in self.loadedModules.keys():
             if self.loadedModules[cmd]['module'] == moduleName:
-                modules.reload(moduleName)
+                modules.reload_modules(moduleName)
 
         # try to grab the module and get parameters from it
         try:
