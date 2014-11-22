@@ -4,6 +4,7 @@ import os
 import sys
 import imp
 
+
 # based off of https://github.com/myano/jenni/blob/master/modules/reload.py#L40
 def reload(moduleName):
     name = '{0}.{1}'.format(os.path.dirname(__file__).split('/')[-1:][0], moduleName)

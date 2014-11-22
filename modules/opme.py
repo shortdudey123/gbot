@@ -22,6 +22,7 @@ Version: {2}
 Note: this requires the bot to be op in the channel
 """.format(commandName, adminOnly, version)
 
+
 def execModule(channel, message, nick, botSelf):
     retCommands = []
     botSelf.bot.sendMessage('ChanServ', 'op {0} {1}'.format(channel, nick))

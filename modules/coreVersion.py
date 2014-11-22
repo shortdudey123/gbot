@@ -21,6 +21,7 @@ Admin Only: {1}
 Version: {2}
 """.format(commandName, adminOnly, version)
 
+
 def execModule(channel, message, nick, botSelf):
     retCommands = []
     botSelf.bot.sendMessage(channel, 'Core Versions:')

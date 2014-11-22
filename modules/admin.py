@@ -19,8 +19,9 @@ View and modify the list of admins for this bot.
 Usage: {0} <list | add nick | del nick>
 Admin Only: {1}
 Version: {2}
-Note: 
+Note:
 """.format(commandName, adminOnly, version)
+
 
 def execModule(channel, message, nick, botSelf):
     retCommands = []

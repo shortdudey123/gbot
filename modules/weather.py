@@ -28,6 +28,7 @@ Note: information on IATA codes can be found at the following links
     http://en.wikipedia.org/wiki/International_Air_Transport_Association_airport_code
 """.format(commandName, adminOnly, version)
 
+
 def execModule(channel, message, nick, botSelf):
     retCommands = []
     re_iata = "^[A-Z][A-Z][A-Z]$"
@@ -52,7 +53,7 @@ def execModule(channel, message, nick, botSelf):
                 botSelf.log("Failed to get weather info for IATA {0}".format(location.upper()))
 
         elif len(location) == 5 and re.match(re_zipCode, location):
-            botSelf.bot.sendMessage(channel, 'Zip codes are not supported yet.  Sorry :(')            
+            botSelf.bot.sendMessage(channel, 'Zip codes are not supported yet.  Sorry :(')
 
         if weatherInfo != []:
             for line in weatherInfo:

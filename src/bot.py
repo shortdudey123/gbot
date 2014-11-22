@@ -385,7 +385,7 @@ class IRCBot:
 
         for moduleName in moduleNames:
             loadedCorrectly = self.loadModule(moduleName)
-            if loadedCorrectly == False:
+            if loadedCorrectly is False:
                 retLoadedCorrectly = False
 
         return retLoadedCorrectly
@@ -460,7 +460,7 @@ class IRCBot:
                 moduleName = message.split()[1]
                 self.bot.sendMessage(channel, "Loading {0}...".format(moduleName), nick)
                 didModuleLoad = self.loadModule(moduleName)
-                if didModuleLoad == False:
+                if didModuleLoad is False:
                     self.bot.sendMessage(channel, "Failed to load {0}...".format(moduleName), nick)
             else:
                 self.adminCheckFailed(channel, message, nick, adminCode)

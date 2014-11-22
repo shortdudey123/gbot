@@ -16,6 +16,7 @@ import time
 
 __IRC_LIB_VERSION__ = 0.1
 
+
 class IRCClient:
     """
     Takes in args to use for interacting with an IRC server
@@ -92,7 +93,7 @@ class IRCClient:
             None
         """
         retData = []
-        self.irc.connect((self.server,self.port))
+        self.irc.connect((self.server, self.port))
 
         self.connected = True
 
@@ -244,7 +245,7 @@ class IRCClient:
         """
         retData = ''
         if channel == '':
-            self._setSocketBufferSize(self.soccketBufferSizeDefault*10)
+            self._setSocketBufferSize(self.soccketBufferSizeDefault * 10)
             self.irc.send("NAMES\n")
             retData = self.getData()
             self._setSocketBufferSize()
@@ -257,7 +258,7 @@ class IRCClient:
                 retData = self.getData()
         return retData
 
-    def getList(self, channel='', target = ''):
+    def getList(self, channel='', target=''):
         """
         Get the channels and their topics
 
@@ -273,7 +274,7 @@ class IRCClient:
         """
         retData = ''
         if channel == '':
-            self._setSocketBufferSize(self.soccketBufferSizeDefault*10)
+            self._setSocketBufferSize(self.soccketBufferSizeDefault * 10)
             self.irc.send("LIST\n")
             retData = self.getData()
             self._setSocketBufferSize()
@@ -286,7 +287,7 @@ class IRCClient:
                 retData = self.getData()
         return retData
 
-    def sendMessageSpecial(self, message, needDataBack = False):
+    def sendMessageSpecial(self, message, needDataBack=False):
         """
         Send a message to the server that is not already defined
 
@@ -350,7 +351,7 @@ class IRCClient:
         Set the mode for the given channel
 
         Args:
-            channel (str): channel to part
+            channel (str): channel to change the mode on
             modes (str): +/- modes to change
             param (str, optional): parameters for the mode change (i.e. a key for +k)
 
@@ -361,9 +362,9 @@ class IRCClient:
             None
         """
         if param == '':
-            self.irc.send("MODE {0} {1}\n".format(channel, mode))
+            self.irc.send("MODE {0} {1}\n".format(channel, modes))
         else:
-            self.irc.send("MODE {0} {1} {2}\n".format(channel, mode, param))
+            self.irc.send("MODE {0} {1} {2}\n".format(channel, modes, param))
         return
 
     def setChannelTopic(self, channel, topic=''):
@@ -488,12 +489,12 @@ class IRCClient:
         else:
 
             if self.identVerifyCall == 'ACC':
-                data = self.sendMessageSpecial("PRIVMSG NickServ ACC {0}".format(nick), needDataBack = True)
+                data = self.sendMessageSpecial("PRIVMSG NickServ ACC {0}".format(nick), needDataBack=True)
                 if len(data) >= 5:
                     statusCode = data.split()[5]
 
             elif self.identVerifyCall == 'STATUS':
-                data = self.sendMessageSpecial("PRIVMSG NickServ STATUS {0}".format(nick), needDataBack = True)
+                data = self.sendMessageSpecial("PRIVMSG NickServ STATUS {0}".format(nick), needDataBack=True)
                 print 'data: {0}'.format(data)
                 if len(data) >= 4:
                     statusCode = data.split()[3]
@@ -527,7 +528,6 @@ class IRCClient:
         """
         self.actualServer = server
         return
-
 
     def getChannelPrefixes(self):
         """

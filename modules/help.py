@@ -21,6 +21,7 @@ Admin Only: {1}
 Version: {2}
 """.format(commandName, adminOnly, version)
 
+
 def execModule(channel, message, nick, botSelf):
     retCommands = []
     if len(message.split()) == 1:
