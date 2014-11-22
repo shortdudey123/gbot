@@ -6,6 +6,8 @@ IRC bot that can load custom command modules
 
 The bot handles most types of IRC messages including INVITE, NOTICE, ERROR, KICK, and PRIVMSG.
 
+[![Code Health](https://landscape.io/github/shortdudey123/gbot/master/landscape.svg)](https://landscape.io/github/shortdudey123/gbot/master)
+
 ## Setup
 
 1. Close this repo
@@ -30,7 +32,7 @@ Run the bot by calling `python gbot.py` in the root of the repo.
 
 ## Using the Bot
 
-By default the only commands the bot will support is `quit` and `loadModule`.  
+By default the only commands the bot will support is `quit` and `loadModule`.
 To load modules on startup, call `.loadModules(['mod1', 'mod2'])` before running the bot.
 Loading modules after the bot is started can be done with a command in a channel or via sidechat. `bot: loadModule <module name>`
 
@@ -49,7 +51,7 @@ A module can do anything that you want.  If you have a module that you thing sho
 	adminOnly = True
 	commandName = 'command'
 	version = 0.1
-	help = """
+	help_msg = """
 	Help Message
 	Usage: {0} <options>
 	Admin Only: {1}
