@@ -26,6 +26,7 @@ Note: this requires the bot to be op in the channel
 def execModule(channel, message, nick, botSelf):
     retCommands = []
     botSelf.bot.sendMessage('ChanServ', 'op {0} {1}'.format(channel, nick))
+    botSelf.log("{0} for {1} in {2}".format(message, nick, channel))
     return retCommands
 
 if __name__ == "__main__":

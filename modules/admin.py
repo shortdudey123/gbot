@@ -41,7 +41,7 @@ def execModule(channel, message, nick, botSelf):
                 botSelf.bot.sendMessage(channel, '{0}'.format(delMsg))
             except Exception, e:
                 botSelf.bot.sendMessage(channel, '{0}'.format(e))
-
+    botSelf.log("{0} for {1} in {2}".format(message, nick, channel))
     return retCommands
 
 if __name__ == "__main__":
