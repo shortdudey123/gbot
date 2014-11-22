@@ -1,12 +1,12 @@
 # gbot
 
+[![Code Health](https://landscape.io/github/shortdudey123/gbot/master/landscape.svg)](https://landscape.io/github/shortdudey123/gbot/master)
+
 ## Introduction
 
 IRC bot that can load custom command modules
 
 The bot handles most types of IRC messages including INVITE, NOTICE, ERROR, KICK, and PRIVMSG.
-
-[![Code Health](https://landscape.io/github/shortdudey123/gbot/master/landscape.svg)](https://landscape.io/github/shortdudey123/gbot/master)
 
 ## Setup
 
