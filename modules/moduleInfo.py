@@ -14,7 +14,7 @@
 adminOnly = True
 commandName = 'moduleInfo'
 version = 0.1
-help = """
+help_msg = """
 Displays the versions of the modules
 Usage: {0}
 Admin Only: {1}

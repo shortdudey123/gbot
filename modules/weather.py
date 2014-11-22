@@ -18,7 +18,7 @@ import re
 adminOnly = False
 commandName = 'weather'
 version = 0.1
-help = """
+help_msg = """
 Gets the weather for the given US airport code
 Usage: {0} <IATA airpot code>
 Admin Only: {1}

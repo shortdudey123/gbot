@@ -14,7 +14,7 @@
 adminOnly = False
 commandName = 'version'
 version = 0.1
-help = """
+help_msg = """
 Displays the version of the bot core
 Usage: {0}
 Admin Only: {1}

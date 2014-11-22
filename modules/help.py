@@ -14,7 +14,7 @@
 adminOnly = False
 commandName = 'help'
 version = 0.2
-help = """
+help_msg = """
 Gets help for the modules
 Usage: {0} <command>
 Admin Only: {1}

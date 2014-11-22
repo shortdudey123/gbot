@@ -14,7 +14,7 @@
 adminOnly = True
 commandName = 'setTopic'
 version = 0.1
-help = """
+help_msg = """
 Sets the topic of the channel.  Omit the topic param to clear the topic.
 Usage: {0} <topic>
 Admin Only: {1}

@@ -345,7 +345,7 @@ class IRCBot:
 
         # if the module was already loaded, then we need to reload it
         for cmd in self.loadedModules.keys():
-            if  self.loadedModules[cmd]['module'] == moduleName:
+            if self.loadedModules[cmd]['module'] == moduleName:
                 modules.reload(moduleName)
 
         # try to grab the module and get parameters from it
@@ -354,7 +354,7 @@ class IRCBot:
             m = getattr(modules, moduleName)
 
             # save it
-            self.loadedModules[m.commandName] = {'module': moduleName, 'admin': m.adminOnly, 'version': m.version, 'help': m.help.strip('\n')}
+            self.loadedModules[m.commandName] = {'module': moduleName, 'admin': m.adminOnly, 'version': m.version, 'help': m.help_msg.strip('\n')}
 
             # Yay it loaded :)
             retLoadedCorrectly = True

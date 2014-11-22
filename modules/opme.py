@@ -14,7 +14,7 @@
 adminOnly = True
 commandName = 'opme'
 version = 0.1
-help = """
+help_msg = """
 Gives the requestor op
 Usage: {0}
 Admin Only: {1}
