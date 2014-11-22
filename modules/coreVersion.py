@@ -27,6 +27,7 @@ def execModule(channel, message, nick, botSelf):
     botSelf.bot.sendMessage(channel, 'Core Versions:')
     botSelf.bot.sendMessage(channel, 'Bot - {0}'.format(botSelf.getVersion()))
     botSelf.bot.sendMessage(channel, 'IRC - {0}'.format(botSelf.bot.getVersion()))
+    botSelf.log("{0} for {1} in {2}".format(message, nick, channel))
     return retCommands
 
 if __name__ == "__main__":

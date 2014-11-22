@@ -27,6 +27,7 @@ def execModule(channel, message, nick, botSelf):
     botSelf.bot.sendMessage(channel, '<module name>: <command> <admin only> <version>')
     for module in botSelf.loadedModules.keys():
         botSelf.bot.sendMessage(channel, '{0}: {1} {2} {3}'.format(botSelf.loadedModules[module]['module'], module, botSelf.loadedModules[module]['admin'], botSelf.loadedModules[module]['version']))
+    botSelf.log("{0} for {1} in {2}".format(message, nick, channel))
     return retCommands
 
 if __name__ == "__main__":

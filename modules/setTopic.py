@@ -29,6 +29,7 @@ def execModule(channel, message, nick, botSelf):
         botSelf.bot.setChannelTopic(channel, '{0}'.format(' '.join(message.split()[1:])))
     elif len(message.split()) == 1:
         botSelf.bot.setChannelTopic(channel)
+    botSelf.log("{0} for {1} in {2}".format(message, nick, channel))
     return retCommands
 
 if __name__ == "__main__":

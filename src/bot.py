@@ -26,7 +26,7 @@ import modules
 __CORE_VERSION__ = 0.1
 
 
-class IRCBot:
+class IRCBot(object):
     """
     Takes in args to use for interacting with an IRC server
     """
@@ -233,15 +233,16 @@ class IRCBot:
         """
         # verify the nick is not an owner
         if nick in self.owners:
-            raise Exception("You can't remove an owner from the admin list!")
             self.log('Could not remove an admin since they are an owner: {0}'.format(nick))
+            raise Exception("You can't remove an owner from the admin list!")
         else:
             try:
                 self.admins.remove(nick)
                 self.log('Removed admin: {0}'.format(nick))
             except ValueError, e:
-                raise Exception("{0} is not an admin!".format(nick))
                 self.log('Could not remove an admin since they are not in the list: {0}'.format(nick))
+                self.log(e)
+                raise Exception("{0} is not an admin!".format(nick))
         return 'Removed {0} from the admin list'.format(nick)
 
     def isAdminAndIdent(self, nick):
@@ -279,7 +280,7 @@ class IRCBot:
 
         return retCode
 
-    def adminCheckFailed(self, channel, message, nick, adminCode):
+    def adminCheckFailed(self, channel, nick, adminCode):
         """
         Verifies an admin and their identity
 
@@ -442,7 +443,7 @@ class IRCBot:
                 if adminCode == 3:
                     self.callModule(command, channel, message, sourceNick)
                 else:
-                    self.adminCheckFailed(channel, message, nick, adminCode)
+                    self.adminCheckFailed(channel, nick, adminCode)
             else:
                 self.callModule(command, channel, message, sourceNick)
 
@@ -452,7 +453,7 @@ class IRCBot:
                 self.bot.sendMessage(channel, "Bye", nick)
                 self.bot.disconnectFromServer()
             else:
-                self.adminCheckFailed(channel, message, nick, adminCode)
+                self.adminCheckFailed(channel, nick, adminCode)
 
         elif command == 'loadModule' and messageLen == 2:
             adminCode = self.isAdminAndIdent(sourceNick)
@@ -463,7 +464,7 @@ class IRCBot:
                 if didModuleLoad is False:
                     self.bot.sendMessage(channel, "Failed to load {0}...".format(moduleName), nick)
             else:
-                self.adminCheckFailed(channel, message, nick, adminCode)
+                self.adminCheckFailed(channel, nick, adminCode)
 
         return
 

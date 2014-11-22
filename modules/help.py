@@ -35,6 +35,7 @@ def execModule(channel, message, nick, botSelf):
     elif len(message.split()) == 2 and message.split()[1] in botSelf.loadedModules.keys():
         for line in botSelf.loadedModules[message.split()[1]]['help'].split('\n'):
             botSelf.bot.sendMessage(channel, line)
+    botSelf.log("{0} for {1} in {2}".format(message, nick, channel))
     return retCommands
 
 if __name__ == "__main__":

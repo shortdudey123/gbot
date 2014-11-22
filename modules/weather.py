@@ -47,10 +47,11 @@ def execModule(channel, message, nick, botSelf):
                 data = json.load(requestData)
                 weatherInfo.append('{0} ({1}) in {2}, {3} - {4}, visibility {5} miles, sky is {6}, wind {7}'.format(data['name'], data['IATA'], data['city'], data['state'], data['weather']['temp'], data['weather']['visibility'], data['weather']['weather'], data['weather']['wind']))
                 weatherInfo.append('Last updated: {0}'.format(data['weather']['meta']['updated']))
-                botSelf.log("Got weather info for IATA {0}".format(location.upper()))
+                botSelf.log("Got weather info for IATA {0} for {1}".format(location.upper(), nick))
             except ValueError, e:
                 botSelf.bot.sendMessage(channel, 'Please use a valid IATA airport code (http://www.iata.org/publications/Pages/code-search.aspx or Wikipidia)')
-                botSelf.log("Failed to get weather info for IATA {0}".format(location.upper()))
+                botSelf.log("Failed to get weather info for IATA {0} for {1}".format(location.upper(), nick))
+                botSelf.log(e)
 
         elif len(location) == 5 and re.match(re_zipCode, location):
             botSelf.bot.sendMessage(channel, 'Zip codes are not supported yet.  Sorry :(')

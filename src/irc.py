@@ -17,7 +17,7 @@ import time
 __IRC_LIB_VERSION__ = 0.1
 
 
-class IRCClient:
+class IRCClient(object):
     """
     Takes in args to use for interacting with an IRC server
     """
